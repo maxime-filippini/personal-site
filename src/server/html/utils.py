@@ -12,7 +12,7 @@ def fancy_link(emoji: str, text: str, href: str, last: bool = False):
             class_="text-xl px-4 w-1/2 group cursor-pointer flex gap-2 items-center justify-center"
             + border_cls,
             href=href,
-            hx_boost="true",
+            # hx_boost="true",
         )[
             h.span[emoji],
             h.span(

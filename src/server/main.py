@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from server.constants import CONTENT_DIR
 from server.constants import RENDERER
 from server.html.pages import cv_page
-from server.html.pages import first_page
+from server.html.pages import home_page
 from server.html.pages import posts_index
 from server.posts import discover_posts
 from server.utils import current_sha
@@ -24,7 +24,7 @@ app.include_router(webhook_router)
 
 @app.get("/")
 async def show_first_page():
-    return HTMLResponse(first_page(theme="lofi"))
+    return HTMLResponse(home_page(theme="lofi"))
 
 
 @app.get("/posts/")

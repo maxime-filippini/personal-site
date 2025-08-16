@@ -44,13 +44,13 @@ def cv_page(theme: str):
     ]
 
 
-def first_page(theme: str):
+def home_page(theme: str):
     return main_layout(theme=theme, title="Maxime Filippini")[
         h.div(
             class_="flex flex-col h-screen items-center justify-center gap-8 max-w-2xl mx-auto"
         )[
             h.h1(
-                class_="sm:text-5xl text-3xl text-center font-bold border border-2 border-black p-8 bg-white",
+                class_="sm:text-5xl text-3xl text-center font-bold border border-2 border-black p-8 bg-white w-full",
                 style="view-transition-name: name-title",
             )["Maxime Filippini"],
             h.div(
