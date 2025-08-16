@@ -6867,6 +6867,9 @@
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
   }
+  .pt-18 {
+    padding-top: calc(var(--spacing) * 18);
+  }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
   }
