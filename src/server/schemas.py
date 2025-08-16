@@ -13,3 +13,4 @@ class PostMetadata(BaseModel):
     last_update: datetime.date
 
     abstract: str
+    draft: bool = True

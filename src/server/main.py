@@ -5,6 +5,7 @@ from fastapi import Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+from server.config import settings
 from server.constants import CONTENT_DIR
 from server.constants import RENDERER
 from server.html.pages import cv_page
@@ -18,7 +19,7 @@ from server.webhook import router as webhook_router
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-
+print(settings)
 app.include_router(webhook_router)
 
 
@@ -46,7 +47,10 @@ async def markdown_page(slug: str, request: Request):
     if not md_path.exists():
         raise HTTPException(404)
 
-    etag, html = await get_or_render(RENDERER, slug, sha, md_path)
+    etag, html, metadata = await get_or_render(RENDERER, slug, sha, md_path)
+
+    if metadata.draft and not settings.BLOG_PROD:
+        raise HTTPException(404)
 
     if request.headers.get("if-none-match") == etag:
         return Response(status_code=304)

@@ -1,25 +1,19 @@
 import abc
 import pathlib
-import re
-from html import escape
 
 import frontmatter
 import htpy as h
 import mistune
 from markupsafe import Markup
-from pygments import highlight
-from pygments.formatters import HtmlFormatter
-from pygments.lexers import TextLexer
-from pygments.lexers import get_lexer_by_name
 
 from server.html.layouts import post_layout
-from server.html.svgs import permalink
+from server.mistune import BlogRenderer
 from server.schemas import PostMetadata
 
 LEVEL_HEADINGS_MAP = {1: h.h1, 2: h.h2, 3: h.h3, 4: h.h4, 5: h.h5, 6: h.h6}
 
 
-class Renderer(abc.ABC):
+class BaseRenderer(abc.ABC):
     def __init__(self):
         self.mistune = mistune.create_markdown()
 
@@ -41,42 +35,10 @@ class Renderer(abc.ABC):
 
         page_html = self.to_html(content_html, metadata=metadata)
 
-        return str(page_html)
+        return str(page_html), metadata
 
 
-def slugify(text: str) -> str:
-    text = re.sub(r"<[^>]+>", "", text)
-    text = text.strip().lower()
-    text = re.sub(r"[^\w\- ]+", "", text)
-    return re.sub(r"\s+", "-", text)
-
-
-class BlogRenderer(mistune.HTMLRenderer):
-    def heading(self, text, level, **attrs):
-        hid = attrs.get("id") or slugify(text)
-
-        elt = LEVEL_HEADINGS_MAP[level]
-
-        return str(
-            elt(id=hid, class_="flex gap-8 items-center")[
-                h.span[text],
-                h.a(href=f"#{hid}", aria_label="Permalink")[permalink()],
-            ]
-        )
-
-    def block_code(self, code, info=None):
-        # "info" is the fence info string, e.g. "python"
-        lang = (info or "").split(None, 1)[0]
-        if not lang:
-            return str(h.pre()[h.code[escape(code)]])
-        try:
-            lexer = get_lexer_by_name(lang, stripall=True)
-        except Exception:
-            lexer = TextLexer(stripall=True)
-        return highlight(code, lexer, HtmlFormatter(wrapcode=True))
-
-
-class TestRenderer(Renderer):
+class BlogPostRenderer(BaseRenderer):
     def __init__(self):
         self.mistune = mistune.create_markdown(renderer=BlogRenderer())
 

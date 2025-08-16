@@ -13,6 +13,7 @@ dependencies = [
     "server",
     "htpy>=25.8.1",
     "pygments>=2.19.2",
+    "pydantic-settings>=2.10.1",
 ]
 
 

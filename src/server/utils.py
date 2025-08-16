@@ -7,9 +7,10 @@ import subprocess
 from cachetools import LRUCache
 
 from server.constants import VERSION_FILE
-from server.renderer import Renderer
+from server.renderer import BaseRenderer
+from server.schemas import PostMetadata
 
-cache: LRUCache[str, tuple[str, str]] = LRUCache(maxsize=2000)
+cache: LRUCache[str, tuple[str, str, PostMetadata]] = LRUCache(maxsize=2000)
 locks: dict[str, asyncio.Lock] = {}
 
 
@@ -26,8 +27,8 @@ def etag_of(html: str) -> str:
 
 
 async def get_or_render(
-    renderer: Renderer, slug: str, sha: str, md_path: pathlib.Path
-) -> tuple[str, str]:
+    renderer: BaseRenderer, slug: str, sha: str, md_path: pathlib.Path
+) -> tuple[str, str, PostMetadata]:
     k = key(slug, sha)
 
     if k in cache:
@@ -40,10 +41,10 @@ async def get_or_render(
             return cache[k]
 
         # Use the new renderer's render_content method
-        html = renderer.render_content(md_path)
+        html, metadata = renderer.render_content(md_path)
         etag = etag_of(html)
-        cache[k] = (etag, html)
-        return etag, html
+        cache[k] = (etag, html, metadata)
+        return etag, html, metadata
 
 
 def invalidate(slugs: list[str] | None = None):

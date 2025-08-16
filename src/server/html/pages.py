@@ -2,6 +2,7 @@ import datetime
 
 import htpy as h
 
+from server.config import settings
 from server.html.layouts import main_layout
 from server.html.layouts import with_topnav
 from server.html.utils import fancy_link
@@ -88,26 +89,25 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
             case _:
                 return f"Posted {days} days ago"
 
+    post_data = [
+        h.article(class_="border-b border-base-300 pb-6")[
+            h.h2(class_="text-2xl font-semibold mb-2")[
+                h.a(
+                    href=f"/posts/{post.slug}",
+                    class_="link link-hover text-primary",
+                )[post.title]
+            ],
+            h.p(class_="text-xs mb-2 text-stone-400")[_days_since_post(post)],
+            h.p[post.abstract],
+        ]
+        for post in posts
+        if (settings.BLOG_PROD and not post.draft) or (not settings.BLOG_PROD)
+    ]
+
     return with_topnav(theme=theme, title="Posts")[
         h.div(class_="max-w-4xl mx-auto")[
-            h.div(class_="space-y-6")[
-                [
-                    h.article(class_="border-b border-base-300 pb-6")[
-                        h.h2(class_="text-2xl font-semibold mb-2")[
-                            h.a(
-                                href=f"/posts/{post.slug}",
-                                class_="link link-hover text-primary",
-                            )[post.title]
-                        ],
-                        h.p(class_="text-xs mb-2 text-stone-400")[
-                            _days_since_post(post)
-                        ],
-                        h.p[post.abstract],
-                    ]
-                    for post in posts
-                ]
-            ]
-            if posts
+            h.div(class_="space-y-6")[post_data]
+            if post_data
             else h.p(class_="text-base-content/70")["No posts found."],
         ]
     ]
