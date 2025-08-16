@@ -19,14 +19,13 @@ def discover_posts() -> List[PostMetadata]:
             with open(md_file, encoding="utf-8") as f:
                 post = frontmatter.load(f)
 
-            # Create metadata, using filename as fallback for slug
+            # Create metadata, auto-generating slug from filename
             metadata_dict = dict(post.metadata)
-            if "slug" not in metadata_dict:
-                metadata_dict["slug"] = md_file.stem
+            metadata_dict["slug"] = md_file.stem  # Always use filename as slug
             if "title" not in metadata_dict:
                 metadata_dict["title"] = md_file.stem.replace("-", " ").title()
 
-            metadata = PostMetadata(**{k: str(v) for k, v in metadata_dict.items()})
+            metadata = PostMetadata(**{k: str(v) for k, v in metadata_dict.items()})  # type: ignore
             posts.append(metadata)
         except Exception:
             # Skip files that can't be parsed

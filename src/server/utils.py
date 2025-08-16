@@ -29,12 +29,16 @@ async def get_or_render(
     renderer: Renderer, slug: str, sha: str, md_path: pathlib.Path
 ) -> tuple[str, str]:
     k = key(slug, sha)
+
     if k in cache:
         return cache[k]
+
     lock = locks.setdefault(k, asyncio.Lock())
+
     async with lock:
         if k in cache:
             return cache[k]
+
         # Use the new renderer's render_content method
         html = renderer.render_content(md_path)
         etag = etag_of(html)

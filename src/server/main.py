@@ -7,10 +7,9 @@ from fastapi.staticfiles import StaticFiles
 
 from server.constants import CONTENT_DIR
 from server.constants import RENDERER
-from server.layouts import cv_page
-from server.layouts import first_page
-from server.layouts import main_layout
-from server.layouts import posts_index_layout
+from server.html.pages import cv_page
+from server.html.pages import first_page
+from server.html.pages import posts_index
 from server.posts import discover_posts
 from server.utils import current_sha
 from server.utils import get_or_render
@@ -29,14 +28,14 @@ async def show_first_page():
 
 
 @app.get("/posts/")
-async def posts_index():
+async def show_posts_index():
     posts = discover_posts()
-    return HTMLResponse(posts_index_layout(posts, theme="lofi"))
+    return HTMLResponse(posts_index(posts, theme="lofi"))
 
 
 @app.get("/cv/")
 async def show_cv_page():
-    return HTMLResponse(main_layout(theme="lofi", title="My CV")[cv_page()])
+    return HTMLResponse(cv_page(theme="lofi"))
 
 
 @app.get("/{slug:path}")

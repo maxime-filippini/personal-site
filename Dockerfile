@@ -27,6 +27,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 FROM python:3.13-slim AS production
 
+# Install git for content cloning
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
@@ -39,6 +42,13 @@ WORKDIR /app
 # Copy virtual environment from build stage
 COPY --from=base --chown=appuser:appuser /app /app
 
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Create data directory and set permissions
+RUN mkdir -p /data && chown -R appuser:appuser /data
+
 # Create cache directory and set permissions
 RUN mkdir -p /home/appuser/.cache && chown -R appuser:appuser /home/appuser/.cache
 
@@ -50,15 +60,14 @@ EXPOSE 8000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD uv run python -c "import requests; requests.get('http://localhost:8000/docs')" || exit 1
+    CMD curl -f http://localhost:8000/docs || exit 1
 
 ENV WEBHOOK_SECRET=change-me \
     REPO_URL= \
     REPO_BRANCH=main
 
-
-    # Start the application
-CMD ["uv", "run", "fastapi", "run", "main.py", "--host", "0.0.0.0", "--port", "8000"]
+# Use entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
 
 
 
