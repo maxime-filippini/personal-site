@@ -65,8 +65,8 @@ def home_page(theme: str):
                 ],
             ],
             h.div(class_="flex w-full justify-center")[
-                fancy_link(emoji="🤓", text="My CV", href="/cv/"),
-                fancy_link(emoji="👨🏼‍💻", text="My blog", href="/posts/", last=True),
+                fancy_link(emoji="🤓", text="CV", href="/cv/"),
+                fancy_link(emoji="👨🏼‍💻", text="Blog", href="/posts/", last=True),
             ],
         ],
     ]
