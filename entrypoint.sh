@@ -22,4 +22,4 @@ echo -n "${LATEST_SHA}" > /data/.VERSION
 echo "Active content sha: ${LATEST_SHA}"
 
 # Run the app in production mode
-exec uv run fastapi run src/server/main.py --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips='*'
+exec uv run fastapi run src/server/main.py --host 0.0.0.0 --port 33000 --proxy-headers --forwarded-allow-ips='*'

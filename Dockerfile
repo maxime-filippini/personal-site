@@ -55,8 +55,7 @@ RUN mkdir -p /home/appuser/.cache && chown -R appuser:appuser /home/appuser/.cac
 # Switch to non-root user
 USER appuser
 
-# Expose port 8000 (FastAPI default)
-EXPOSE 8000
+EXPOSE 33000
 
 # Use entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
