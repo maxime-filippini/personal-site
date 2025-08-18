@@ -95,6 +95,7 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
                 h.a(
                     href=f"/posts/{post.slug}",
                     class_="link link-hover text-primary",
+                    hx_boost="true",
                 )[post.title]
             ],
             h.p(class_="text-xs mb-2 text-stone-400")[_days_since_post(post)],
