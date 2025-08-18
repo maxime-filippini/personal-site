@@ -78,7 +78,9 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
     new_sha = payload.get("sha")
     ref = payload.get("ref", "")
 
+    print(f"Full webhook payload: {payload}")
     print(f"Webhook received: sha={new_sha}, ref={ref}")
+    logging.info(f"Full webhook payload: {payload}")
     logging.info(f"Webhook received: sha={new_sha}, ref={ref}")
 
     if not new_sha:
