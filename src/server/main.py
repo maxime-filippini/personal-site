@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from server.config import settings
 from server.constants import CONTENT_DIR
+from server.constants import DATA_DIR
 from server.constants import RENDERER
 from server.constants import VERSION_FILE
 from server.constants import get_preview_content_dir
@@ -35,7 +36,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.mount(
     "/components",
-    StaticFiles(directory="../../../data/content/svelte/dist/components"),
+    StaticFiles(directory=str(CONTENT_DIR / "svelte/dist/components")),
     name="components",
 )
 
@@ -62,62 +63,59 @@ async def show_cv_page():
 
 @app.get("/api/routes")
 async def list_routes():
-    from server.constants import DATA_DIR
-    
-    routes = {
-        "main": {},
-        "previews": {}
-    }
-    
+    routes = {"main": {}, "previews": {}}
+
     # Main content routes
     if CONTENT_DIR.exists():
         for md_file in CONTENT_DIR.rglob("*.md"):
             slug = str(md_file.relative_to(CONTENT_DIR).with_suffix(""))
             routes["main"][slug] = f"/{slug}"
-    
+
     # Preview branch routes
     for preview_dir in DATA_DIR.glob("content-preview-*"):
         if preview_dir.is_dir():
             branch_name = preview_dir.name.removeprefix("content-preview-")
             routes["previews"][branch_name] = {}
-            
+
             for md_file in preview_dir.rglob("*.md"):
                 slug = str(md_file.relative_to(preview_dir).with_suffix(""))
-                routes["previews"][branch_name][slug] = f"/_preview/{branch_name}/{slug}"
-    
+                routes["previews"][branch_name][slug] = (
+                    f"/_preview/{branch_name}/{slug}"
+                )
+
     return routes
 
 
 @app.get("/api/debug")
 async def debug_info():
-    from server.constants import DATA_DIR
-    
     info = {
         "data_dir": str(DATA_DIR),
         "main_content": {
             "exists": CONTENT_DIR.exists(),
             "path": str(CONTENT_DIR),
             "version_file": str(VERSION_FILE),
-            "version_exists": VERSION_FILE.exists()
+            "version_exists": VERSION_FILE.exists(),
         },
-        "preview_branches": []
+        "preview_branches": [],
     }
-    
+
     # Check all preview directories
     for preview_dir in DATA_DIR.glob("content-preview-*"):
         branch_name = preview_dir.name.removeprefix("content-preview-")
         version_file = get_preview_version_file(branch_name)
-        
+
         branch_info = {
             "branch": branch_name,
             "content_dir": str(preview_dir),
             "exists": preview_dir.exists(),
             "version_file": str(version_file),
             "version_exists": version_file.exists(),
-            "file_count": len(list(preview_dir.rglob("*.md"))) if preview_dir.exists() else 0
+            "file_count": len(list(preview_dir.rglob("*.md")))
+            if preview_dir.exists()
+            else 0,
         }
         info["preview_branches"].append(branch_info)
-    
+
     return info
 
 
@@ -156,7 +154,7 @@ async def preview_markdown_page(branch: str, slug: str, request: Request):
 
 @app.get("/{slug:path}")
 async def markdown_page(slug: str, request: Request):
-    sha = current_sha()
+    sha = current_sha() if VERSION_FILE.exists() else "dev"
     md_path = (CONTENT_DIR / slug).with_suffix(".md")
 
     if not md_path.exists():

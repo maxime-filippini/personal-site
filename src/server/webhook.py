@@ -89,8 +89,12 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
     # Extract branch information
     is_valid_branch, preview_branch = extract_branch_info(ref)
 
-    print(f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}")
-    logging.info(f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}")
+    print(
+        f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}"
+    )
+    logging.info(
+        f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}"
+    )
 
     if not is_valid_branch:
         response = {"ok": True, "message": f"Ignoring push to {ref}"}
