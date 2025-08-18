@@ -1,3 +1,4 @@
+import debugpy
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi import Request
@@ -16,8 +17,24 @@ from server.utils import current_sha
 from server.utils import get_or_render
 from server.webhook import router as webhook_router
 
+# Enable debugger
+try:
+    debugpy.listen(("0.0.0.0", 5678))
+    print("Debugger listening on port 5678...")
+except RuntimeError as e:
+    if "Address already in use" in str(e):
+        print("Debugger port 5678 already in use, skipping debugger setup")
+    else:
+        raise
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(
+    "/components",
+    StaticFiles(directory="data/content/svelte/dist/components"),
+    name="components",
+)
+
 
 print(settings)
 app.include_router(webhook_router)
@@ -49,7 +66,7 @@ async def markdown_page(slug: str, request: Request):
 
     etag, html, metadata = await get_or_render(RENDERER, slug, sha, md_path)
 
-    if metadata.draft and not settings.BLOG_PROD:
+    if metadata.draft and settings.BLOG_PROD:
         raise HTTPException(404)
 
     if request.headers.get("if-none-match") == etag:

@@ -1,8 +1,10 @@
 import re
+import shlex
 from html import escape
 
 import htpy as h
 import mistune
+from markupsafe import Markup
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import TextLexer
@@ -35,11 +37,29 @@ class BlogRenderer(mistune.HTMLRenderer):
 
     def block_code(self, code, info=None):
         # "info" is the fence info string, e.g. "python"
-        lang = (info or "").split(None, 1)[0]
+        lang, *opts = shlex.split(info or "")
         if not lang:
             return str(h.pre()[h.code[escape(code)]])
         try:
             lexer = get_lexer_by_name(lang, stripall=True)
         except Exception:
             lexer = TextLexer(stripall=True)
+
+        # Parse the options
+        parsed_opts = {}
+
+        for opt in opts:
+            if "=" not in opt:
+                continue
+            left, right = opt.split("=", 1)
+            parsed_opts[left] = right
+
+        if lang == "custom":
+            elt = parsed_opts.pop("elt")
+            path = parsed_opts.pop("__path")
+            return Markup(f"""
+                          <script src="{path}"></script>
+                          <{elt}></{elt}>
+                """)
+
         return highlight(code, lexer, HtmlFormatter(wrapcode=True))

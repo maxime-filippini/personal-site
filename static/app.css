@@ -8,6 +8,10 @@
   --font-mono: "Roboto Mono", mono;
 }
 
+body {
+  @apply bg-stone-50;
+}
+
 @layer utilities {
   .prose-pre-stone {
     --tw-prose-pre-bg: theme("colors.stone-300");

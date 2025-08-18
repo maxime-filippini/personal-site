@@ -16,7 +16,6 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --container-xl: 36rem;
     --container-2xl: 42rem;
     --container-3xl: 48rem;
     --container-4xl: 56rem;
@@ -32,8 +31,6 @@
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
     --text-5xl: 3rem;
     --text-5xl--line-height: 1;
     --font-weight-semibold: 600;
@@ -5081,9 +5078,6 @@
       }
     }
   }
-  .mr-auto {
-    margin-right: auto;
-  }
   .fieldset-legend {
     margin-bottom: calc(0.25rem * -1);
     display: flex;
@@ -5108,9 +5102,6 @@
   }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
-  }
-  .mb-12 {
-    margin-bottom: calc(var(--spacing) * 12);
   }
   .carousel-item {
     box-sizing: content-box;
@@ -5718,9 +5709,6 @@
       font-size: 0.6875rem;
     }
   }
-  .h-8 {
-    height: calc(var(--spacing) * 8);
-  }
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
@@ -5861,9 +5849,6 @@
     flex-shrink: 1;
   }
   .flex-grow {
-    flex-grow: 1;
-  }
-  .grow {
     flex-grow: 1;
   }
   .border-collapse {
@@ -6022,17 +6007,8 @@
   .items-center {
     align-items: center;
   }
-  .items-start {
-    align-items: flex-start;
-  }
-  .justify-between {
-    justify-content: space-between;
-  }
   .justify-center {
     justify-content: center;
-  }
-  .justify-start {
-    justify-content: flex-start;
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -6045,9 +6021,6 @@
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
-  }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
   }
   .space-y-6 {
     :where(& > :not(:last-child)) {
@@ -6576,9 +6549,6 @@
   .bg-stone-100 {
     background-color: var(--color-stone-100);
   }
-  .bg-stone-200 {
-    background-color: var(--color-stone-200);
-  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -6849,12 +6819,6 @@
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
-  .py-12 {
-    padding-block: calc(var(--spacing) * 12);
-  }
-  .py-18 {
-    padding-block: calc(var(--spacing) * 18);
-  }
   .file-input-xl {
     padding-inline-end: calc(0.25rem * 6);
     --size: calc(var(--size-field, 0.25rem) * 14);
@@ -6878,9 +6842,6 @@
   }
   .text-center {
     text-align: center;
-  }
-  .text-left {
-    text-align: left;
   }
   .font-mono {
     font-family: var(--font-mono);
@@ -6924,14 +6885,6 @@
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
-  }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
-  .text-5xl {
-    font-size: var(--text-5xl);
-    line-height: var(--tw-leading, var(--text-5xl--line-height));
   }
   .text-lg {
     font-size: var(--text-lg);
@@ -7356,9 +7309,6 @@
   }
   .text-primary {
     color: var(--color-primary);
-  }
-  .text-stone-300 {
-    color: var(--color-stone-300);
   }
   .text-stone-400 {
     color: var(--color-stone-400);
@@ -8124,11 +8074,6 @@
       display: block;
     }
   }
-  .sm\:h-screen {
-    @media (width >= 40rem) {
-      height: 100vh;
-    }
-  }
   .sm\:justify-between {
     @media (width >= 40rem) {
       justify-content: space-between;
@@ -8144,11 +8089,6 @@
     @media (width >= 40rem) {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
-    }
-  }
-  .prose-pre\:w-xl {
-    & :is(:where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
-      width: var(--container-xl);
     }
   }
   .prose-pre\:rounded-none {
@@ -8172,16 +8112,14 @@
       background-color: var(--color-stone-100);
     }
   }
-  .prose-pre\:bg-stone-200 {
-    & :is(:where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
-      background-color: var(--color-stone-200);
-    }
-  }
   .prose-pre\:text-black {
     & :is(:where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       color: var(--color-black);
     }
   }
+}
+body {
+  background-color: var(--color-stone-50);
 }
 @layer utilities {
   .prose-pre-stone {

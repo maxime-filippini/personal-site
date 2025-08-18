@@ -15,7 +15,7 @@ LEVEL_HEADINGS_MAP = {1: h.h1, 2: h.h2, 3: h.h3, 4: h.h4, 5: h.h5, 6: h.h6}
 
 class BaseRenderer(abc.ABC):
     def __init__(self):
-        self.mistune = mistune.create_markdown()
+        self.mistune = mistune.create_markdown(escape=False)
 
     @abc.abstractmethod
     def to_html(
@@ -35,14 +35,15 @@ class BaseRenderer(abc.ABC):
 
         page_html = self.to_html(content_html, metadata=metadata)
 
-        return str(page_html), metadata
+        return Markup(page_html), metadata
 
 
 class BlogPostRenderer(BaseRenderer):
     def __init__(self):
-        self.mistune = mistune.create_markdown(renderer=BlogRenderer())
+        self.mistune = mistune.create_markdown(escape=False, renderer=BlogRenderer())
 
     def to_html(self, markdown_content: str, metadata: PostMetadata) -> h.Renderable:
+        print(markdown_content)
         if metadata.last_update == metadata.posted_on:
             class_ = "text-sm border-y border-stone-400 py-4"
             add_update = False
