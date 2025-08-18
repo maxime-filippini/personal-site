@@ -158,6 +158,7 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
         "invalidated": changed_slugs,
     }
 
+    print(output)
     logging.info(output)
 
     return output
