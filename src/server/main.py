@@ -29,9 +29,10 @@ except RuntimeError as e:
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
 app.mount(
     "/components",
-    StaticFiles(directory="data/content/svelte/dist/components"),
+    StaticFiles(directory="../../../data/content/svelte/dist/components"),
     name="components",
 )
 
