@@ -156,9 +156,12 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
         "old": old_sha,
         "new": new_sha,
         "invalidated": changed_slugs,
+        "content_dir": str(content_dir),
+        "version_file": str(version_file),
+        "ref": ref,
     }
 
-    print(output)
-    logging.info(output)
+    print(f"Webhook processed: {output}")
+    logging.info(f"Webhook processed: {output}")
 
     return output
