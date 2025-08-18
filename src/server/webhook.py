@@ -78,14 +78,23 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
     new_sha = payload.get("sha")
     ref = payload.get("ref", "")
 
+    print(f"Webhook received: sha={new_sha}, ref={ref}")
+    logging.info(f"Webhook received: sha={new_sha}, ref={ref}")
+
     if not new_sha:
         raise HTTPException(400, "Missing sha")
 
     # Extract branch information
     is_valid_branch, preview_branch = extract_branch_info(ref)
 
+    print(f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}")
+    logging.info(f"Branch extraction: is_valid_branch={is_valid_branch}, preview_branch={preview_branch}")
+
     if not is_valid_branch:
-        return {"ok": True, "message": f"Ignoring push to {ref}"}
+        response = {"ok": True, "message": f"Ignoring push to {ref}"}
+        print(f"Ignoring branch: {response}")
+        logging.info(f"Ignoring branch: {response}")
+        return response
 
     # Determine target directories
     if preview_branch:
