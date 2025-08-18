@@ -2,6 +2,7 @@
 import hashlib
 import hmac
 import json
+import logging
 import os
 import pathlib
 import subprocess
@@ -148,7 +149,7 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
         except Exception:
             pass
 
-    return {
+    output = {
         "ok": True,
         "branch": branch_name,
         "preview": preview_branch,
@@ -156,3 +157,7 @@ async def webhook_publish(request: Request, x_signature_256: str | None = Header
         "new": new_sha,
         "invalidated": changed_slugs,
     }
+
+    logging.info(output)
+
+    return output
