@@ -14,12 +14,12 @@ cache: LRUCache[str, tuple[str, str, PostMetadata]] = LRUCache(maxsize=2000)
 locks: dict[str, asyncio.Lock] = {}
 
 
-def current_sha() -> str:
-    return VERSION_FILE.read_text().strip()
+def current_sha(version_file: pathlib.Path = VERSION_FILE) -> str:
+    return version_file.read_text().strip()
 
 
-def key(slug: str, sha: str) -> str:
-    return f"{slug}::{sha}"
+def key(slug: str, sha: str, branch: str = "main") -> str:
+    return f"{branch}::{slug}::{sha}"
 
 
 def etag_of(html: str) -> str:
@@ -27,9 +27,13 @@ def etag_of(html: str) -> str:
 
 
 async def get_or_render(
-    renderer: BaseRenderer, slug: str, sha: str, md_path: pathlib.Path
+    renderer: BaseRenderer,
+    slug: str,
+    sha: str,
+    md_path: pathlib.Path,
+    branch: str = "main",
 ) -> tuple[str, str, PostMetadata]:
-    k = key(slug, sha)
+    k = key(slug, sha, branch)
 
     if k in cache:
         return cache[k]
@@ -47,14 +51,20 @@ async def get_or_render(
         return etag, html, metadata
 
 
-def invalidate(slugs: list[str] | None = None):
+def invalidate(slugs: list[str] | None = None, branch: str = "main"):
     if not slugs:
-        cache.clear()
+        if branch == "main":
+            cache.clear()
+        else:
+            # Clear only this preview branch
+            for k in list(cache.keys()):
+                if k.startswith(f"{branch}::"):
+                    cache.pop(k, None)
         return
     for slug in slugs:
-        # remove all versions for that slug
+        # remove all versions for that slug on this branch
         for k in list(cache.keys()):
-            if k.startswith(f"{slug}::"):
+            if k.startswith(f"{branch}::{slug}::"):
                 cache.pop(k, None)
 
 

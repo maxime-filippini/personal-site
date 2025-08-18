@@ -9,6 +9,8 @@ from fastapi.staticfiles import StaticFiles
 from server.config import settings
 from server.constants import CONTENT_DIR
 from server.constants import RENDERER
+from server.constants import get_preview_content_dir
+from server.constants import get_preview_version_file
 from server.html.pages import cv_page
 from server.html.pages import home_page
 from server.html.pages import posts_index
@@ -55,6 +57,39 @@ async def show_posts_index():
 @app.get("/cv/")
 async def show_cv_page():
     return HTMLResponse(cv_page(theme="lofi"))
+
+
+@app.get("/_preview/{branch}/{slug:path}")
+async def preview_markdown_page(branch: str, slug: str, request: Request):
+    preview_content_dir = get_preview_content_dir(branch)
+    preview_version_file = get_preview_version_file(branch)
+
+    if not preview_content_dir.exists():
+        raise HTTPException(404, f"Preview branch '{branch}' not found")
+
+    if not preview_version_file.exists():
+        raise HTTPException(404, f"Preview branch '{branch}' not initialized")
+
+    sha = current_sha(preview_version_file)
+    md_path = (preview_content_dir / slug).with_suffix(".md")
+
+    if not md_path.exists():
+        raise HTTPException(404)
+
+    etag, html, metadata = await get_or_render(
+        RENDERER, slug, sha, md_path, f"preview-{branch}"
+    )
+
+    if request.headers.get("if-none-match") == etag:
+        return Response(status_code=304)
+
+    return HTMLResponse(
+        html,
+        headers={
+            "Cache-Control": "public, max-age=60, stale-while-revalidate=30",  # Shorter cache for previews
+            "ETag": etag,
+        },
+    )
 
 
 @app.get("/{slug:path}")
