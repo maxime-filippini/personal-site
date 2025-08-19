@@ -13,6 +13,7 @@ from server.constants import RENDERER
 from server.constants import VERSION_FILE
 from server.constants import get_preview_content_dir
 from server.constants import get_preview_version_file
+from server.html.pages import contact_page
 from server.html.pages import cv_page
 from server.html.pages import home_page
 from server.html.pages import posts_index
@@ -48,6 +49,11 @@ app.include_router(webhook_router)
 @app.get("/")
 async def show_first_page():
     return HTMLResponse(home_page(theme="lofi"))
+
+
+@app.get("/contact/")
+async def show_contact_me_page():
+    return HTMLResponse(contact_page(theme="lofi"))
 
 
 @app.get("/posts/")
