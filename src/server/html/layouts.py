@@ -21,7 +21,6 @@ def root_layout(children: h.Node, *, theme: str, title: str):
         Markup("""
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.10.0/+esm'
-mermaid.initialize({ startOnLoad: true });
 </script>
 """),
     ]
