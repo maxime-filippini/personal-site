@@ -1,1 +1,1 @@
-./bin/tailwindcss -i ./static/app.css -o /static/output.css -w
+./bin/tailwindcss -i ./static/app.css -o ./static/output.css -w

@@ -64,7 +64,7 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
             h.p(class_="text-xs mb-2 text-stone-400")[_days_since_post(post)],
             h.p[post.abstract],
         ]
-        for post in posts
+        for post in reversed(sorted(posts, key=lambda item: item.last_update))
         if (settings.BLOG_PROD and not post.draft) or (not settings.BLOG_PROD)
     ]
 

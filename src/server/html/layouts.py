@@ -1,4 +1,5 @@
 import htpy as h
+from markupsafe import Markup
 
 from server.html.utils import link
 from server.html.utils import posthog
@@ -17,6 +18,12 @@ def root_layout(children: h.Node, *, theme: str, title: str):
             h.script(src="/static/htmx.min.js"),
         ],
         children,
+        Markup("""
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.10.0/+esm'
+mermaid.initialize({ startOnLoad: true });
+</script>
+"""),
     ]
 
 

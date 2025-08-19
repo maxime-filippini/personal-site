@@ -62,4 +62,10 @@ class BlogRenderer(mistune.HTMLRenderer):
                           <{elt}></{elt}>
                 """)
 
+        if lang == "mermaid":
+            return str(h.center[h.pre(class_="mermaid")[code]])
+
+        if lang == "raw_html":
+            return str(Markup(code))
+
         return highlight(code, lexer, HtmlFormatter(wrapcode=True))
