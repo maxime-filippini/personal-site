@@ -5,11 +5,11 @@ from server.html.svgs import link_arrow
 
 
 def fancy_link(emoji: str, text: str, href: str, last: bool = False):
-    border_cls = "" if last else " border-r border-black"
+    border_cls = "" if last else " sm:border-r sm:border-black"
 
     return (
         h.a(
-            class_="text-xl px-4 w-1/2 group cursor-pointer flex gap-2 items-center justify-center"
+            class_="text-xl px-4 sm:w-1/2 group cursor-pointer flex gap-2 items-center justify-center"
             + border_cls,
             href=href,
             hx_boost="true",

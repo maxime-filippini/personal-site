@@ -21,6 +21,14 @@ def root_layout(children: h.Node, *, theme: str, title: str):
         Markup("""
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.10.0/+esm'
+
+// Initialize mermaid on page load
+mermaid.initialize({ startOnLoad: true });
+
+// Reinitialize mermaid after htmx navigation
+document.addEventListener('htmx:afterSwap', function() {
+    mermaid.run();
+});
 </script>
 """),
     ]
@@ -64,5 +72,5 @@ def post_layout(
     children: h.Node, *, theme: str, metadata: PostMetadata
 ) -> h.Renderable:
     return with_topnav(theme=theme, title=metadata.title)[
-        h.div(class_="container max-w-3xl mx-auto")[children]
+        h.div(class_="container max-w-3xl mx-auto mb-8")[children]
     ]

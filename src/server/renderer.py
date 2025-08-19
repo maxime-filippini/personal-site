@@ -66,7 +66,7 @@ class BlogPostRenderer(BaseRenderer):
 
         return post_layout(theme="lofi", metadata=metadata)[
             h.article(
-                class_="prose prose-pre:bg-stone-100 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-stone-300 prose-a:text-stone-500 prose-img:border-stone-300 prose-img:border"
+                class_="prose prose-pre:bg-stone-100 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-stone-300 prose-a:text-stone-500 prose-img:border-stone-300 prose-img:border prose-a:hover:font-bold prose-a:duration-100"
             )[
                 h.h1[metadata.title],
                 *elts,

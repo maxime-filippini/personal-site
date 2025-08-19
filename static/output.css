@@ -8134,9 +8134,30 @@
       display: block;
     }
   }
+  .sm\:w-1\/2 {
+    @media (width >= 40rem) {
+      width: calc(1/2 * 100%);
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
+    }
+  }
   .sm\:justify-between {
     @media (width >= 40rem) {
       justify-content: space-between;
+    }
+  }
+  .sm\:border-r {
+    @media (width >= 40rem) {
+      border-right-style: var(--tw-border-style);
+      border-right-width: 1px;
+    }
+  }
+  .sm\:border-black {
+    @media (width >= 40rem) {
+      border-color: var(--color-black);
     }
   }
   .sm\:text-2xl {
@@ -8154,6 +8175,32 @@
   .prose-a\:text-stone-500 {
     & :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       color: var(--color-stone-500);
+    }
+  }
+  .prose-a\:duration-100 {
+    & :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+      --tw-duration: 100ms;
+      transition-duration: 100ms;
+    }
+  }
+  .prose-a\:hover\:font-bold {
+    & :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+      &:hover {
+        @media (hover: hover) {
+          --tw-font-weight: var(--font-weight-bold);
+          font-weight: var(--font-weight-bold);
+        }
+      }
+    }
+  }
+  .prose-a\:hover\:font-semibold {
+    & :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+      &:hover {
+        @media (hover: hover) {
+          --tw-font-weight: var(--font-weight-semibold);
+          font-weight: var(--font-weight-semibold);
+        }
+      }
     }
   }
   .prose-pre\:rounded-none {
