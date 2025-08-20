@@ -1,6 +1,7 @@
 import htpy as h
 from markupsafe import Markup
 
+from server.config import settings
 from server.html.utils import link
 from server.html.utils import posthog
 from server.schemas import PostMetadata
@@ -8,13 +9,15 @@ from server.schemas import PostMetadata
 
 @h.with_children
 def root_layout(children: h.Node, *, theme: str, title: str):
+    posthog_script = posthog() if settings.BLOG_PROD else None
+
     return h.html(data_theme=theme, lang="en")[
         h.head[
             h.meta(charset="UTF-8"),
             h.meta(name="viewport", content="width=device-width, initial-scale=1.0"),
             h.title[title],
             h.link(rel="stylesheet", href="/static/output.css"),
-            posthog(),
+            posthog_script,
             h.script(src="/static/htmx.min.js"),
         ],
         children,
