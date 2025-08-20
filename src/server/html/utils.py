@@ -40,7 +40,7 @@ def posthog():
     posthog.init('phc_HnnZk7Lu8EHkkQBmBjeMqrzwMluSASlsnZ4BdqaR8PJ', {
         api_host: 'https://eu.i.posthog.com',
         defaults: '2025-05-24',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+        person_profiles: 'always',
     })           
 """)
     ]
