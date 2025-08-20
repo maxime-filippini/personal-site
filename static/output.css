@@ -6143,6 +6143,9 @@
       padding-block: calc(0.25rem * 1);
     }
   }
+  .rounded {
+    border-radius: 0.25rem;
+  }
   .rounded-box {
     border-radius: var(--radius-box);
   }
@@ -7343,12 +7346,6 @@
   .text-stone-500 {
     color: var(--color-stone-500);
   }
-  .text-success {
-    color: var(--color-success);
-  }
-  .text-warning {
-    color: var(--color-warning);
-  }
   .uppercase {
     text-transform: uppercase;
   }
@@ -8189,16 +8186,6 @@
         @media (hover: hover) {
           --tw-font-weight: var(--font-weight-bold);
           font-weight: var(--font-weight-bold);
-        }
-      }
-    }
-  }
-  .prose-a\:hover\:font-semibold {
-    & :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
-      &:hover {
-        @media (hover: hover) {
-          --tw-font-weight: var(--font-weight-semibold);
-          font-weight: var(--font-weight-semibold);
         }
       }
     }
