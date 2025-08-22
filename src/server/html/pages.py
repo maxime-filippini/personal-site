@@ -30,9 +30,9 @@ def home_page(theme: str):
             h.div(
                 class_="flex flex-col sm:flex-row gap-2 items-center w-full justify-center"
             )[
-                fancy_link(emoji="🤓", text="CV", href="/cv/"),
-                fancy_link(emoji="👨🏼‍💻", text="Blog", href="/posts/"),
-                fancy_link(emoji="📮", text="Contact me", href="/contact/", last=True),
+                fancy_link(text="CV", href="/cv/"),
+                fancy_link(text="Blog", href="/posts/"),
+                fancy_link(text="Contact me", href="/contact/", last=True),
             ],
         ],
     ]

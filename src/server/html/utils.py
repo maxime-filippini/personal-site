@@ -4,7 +4,7 @@ from markupsafe import Markup
 from server.html.svgs import link_arrow
 
 
-def fancy_link(emoji: str, text: str, href: str, last: bool = False):
+def fancy_link(text: str, href: str, last: bool = False):
     border_cls = "" if last else " sm:border-r sm:border-black"
 
     return (
@@ -14,7 +14,6 @@ def fancy_link(emoji: str, text: str, href: str, last: bool = False):
             href=href,
             hx_boost="true",
         )[
-            h.span[emoji],
             h.span(
                 class_="group-hover:underline group-hover:font-bold underline-offset-8 duration-100 text-center"
             )[text],
