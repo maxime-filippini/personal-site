@@ -70,7 +70,7 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
         if (settings.BLOG_PROD and not post.draft) or (not settings.BLOG_PROD)
     ]
 
-    return with_topnav(theme=theme, title="Posts")[
+    return with_topnav(theme=theme, title="Posts", description="The posts index")[
         h.div(class_="max-w-4xl mx-auto")[
             h.div(class_="space-y-6")[post_data]
             if post_data
@@ -141,7 +141,7 @@ def _tech_block(
 
 
 def cv_page(theme: str):
-    return with_topnav(title="My CV", theme=theme)[
+    return with_topnav(title="My CV", theme=theme, description="My CV")[
         h.div(class_="max-w-4xl mx-auto")[
             h.div(class_="mb-8")[
                 h.h1(
@@ -354,7 +354,7 @@ def cv_page(theme: str):
 
 
 def contact_page(theme: str):
-    return with_topnav(theme=theme, title="Contact me")[
+    return with_topnav(theme=theme, title="Contact me", description="Contact me")[
         h.div(class_="max-w-4xl mx-auto")[
             h.div(class_="space-y-6")[
                 h.p[

@@ -8,7 +8,7 @@ from server.schemas import PostMetadata
 
 
 @h.with_children
-def root_layout(children: h.Node, *, theme: str, title: str):
+def root_layout(children: h.Node, *, theme: str, title: str, description: str):
     posthog_script = posthog() if settings.BLOG_PROD else None
 
     return h.html(data_theme=theme, lang="en")[
@@ -16,6 +16,7 @@ def root_layout(children: h.Node, *, theme: str, title: str):
             h.meta(charset="UTF-8"),
             h.meta(name="viewport", content="width=device-width, initial-scale=1.0"),
             h.title[title],
+            h.meta(property="og:description", content=description),
             h.link(rel="stylesheet", href="/static/output.css"),
             h.link(rel="stylesheet", href="/static/pygments-latte.css"),
             posthog_script,
@@ -40,7 +41,7 @@ document.addEventListener('htmx:afterSwap', function() {
 
 @h.with_children
 def main_layout(children: h.Node, *, theme: str, title: str):
-    return root_layout(theme=theme, title=title)[
+    return root_layout(theme=theme, title=title, description="")[
         h.body(class_="font-mono bg-stone-50 min-h-screen")[
             h.div(class_="p-8")[children]
         ],
@@ -48,8 +49,10 @@ def main_layout(children: h.Node, *, theme: str, title: str):
 
 
 @h.with_children
-def with_topnav(children: h.Node, *, theme: str, title: str) -> h.Renderable:
-    return root_layout(theme=theme, title=title)[
+def with_topnav(
+    children: h.Node, *, theme: str, title: str, description: str
+) -> h.Renderable:
+    return root_layout(theme=theme, title=title, description=description)[
         h.body(class_="font-mono bg-stone-50 min-h-screen")[
             h.div(class_="pt-18")[
                 h.div(
@@ -75,6 +78,6 @@ def with_topnav(children: h.Node, *, theme: str, title: str) -> h.Renderable:
 def post_layout(
     children: h.Node, *, theme: str, metadata: PostMetadata
 ) -> h.Renderable:
-    return with_topnav(theme=theme, title=metadata.title)[
-        h.div(class_="container max-w-3xl mx-auto pb-8")[children]
-    ]
+    return with_topnav(
+        theme=theme, title=metadata.title, description=metadata.abstract
+    )[h.div(class_="container max-w-3xl mx-auto pb-8")[children]]
