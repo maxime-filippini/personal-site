@@ -26,6 +26,10 @@ def discover_posts() -> List[PostMetadata]:
                 metadata_dict["title"] = md_file.stem.replace("-", " ").title()
 
             metadata = PostMetadata(**{k: str(v) for k, v in metadata_dict.items()})  # type: ignore
+
+            if metadata.draft:
+                metadata.title += " [DRAFT]"
+
             posts.append(metadata)
         except Exception:
             # Skip files that can't be parsed

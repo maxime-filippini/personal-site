@@ -17,6 +17,7 @@ def root_layout(children: h.Node, *, theme: str, title: str):
             h.meta(name="viewport", content="width=device-width, initial-scale=1.0"),
             h.title[title],
             h.link(rel="stylesheet", href="/static/output.css"),
+            h.link(rel="stylesheet", href="/static/pygments-latte.css"),
             posthog_script,
             h.script(src="/static/htmx.min.js"),
         ],

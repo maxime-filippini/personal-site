@@ -4,6 +4,7 @@ from html import escape
 
 import htpy as h
 import mistune
+from catppuccin.extras.pygments import LatteStyle
 from markupsafe import Markup
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
@@ -68,4 +69,14 @@ class BlogRenderer(mistune.HTMLRenderer):
         if lang == "raw_html":
             return str(Markup(code))
 
-        return highlight(code, lexer, HtmlFormatter(wrapcode=True))
+        if lang == "note":
+            markdown_parser = mistune.create_markdown(renderer=self, escape=False)
+            parsed, _ = markdown_parser.parse(code)
+            print(parsed)
+            return str(
+                h.div(class_="bg-stone-200 py-2 px-4")[
+                    h.p(class_="font-bold")["Note"], Markup(parsed)
+                ]
+            )
+
+        return highlight(code, lexer, HtmlFormatter(wrapcode=True, style=LatteStyle))
