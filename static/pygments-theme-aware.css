@@ -1,0 +1,400 @@
+/* Theme-aware Pygments styles using DaisyUI variables */
+[data-theme="lofi"] .highlight {
+  /* Light theme - Latte colors */
+  background: #eff1f5;
+  color: #4c4f69;
+}
+
+[data-theme="lofi"] .highlight .hll {
+  background-color: #dc8a78;
+}
+[data-theme="lofi"] .highlight .c {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .err {
+  color: #d20f39;
+}
+[data-theme="lofi"] .highlight .k {
+  color: #8839ef;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .o {
+  color: #04a5e5;
+}
+[data-theme="lofi"] .highlight .ch {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .cm {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .cp {
+  color: #8839ef;
+}
+[data-theme="lofi"] .highlight .cpf {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .c1 {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .cs {
+  color: #8c8fa1;
+  font-style: italic;
+}
+[data-theme="lofi"] .highlight .kc {
+  color: #fe640b;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .kd {
+  color: #8839ef;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .kn {
+  color: #8839ef;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .kp {
+  color: #8839ef;
+}
+[data-theme="lofi"] .highlight .kr {
+  color: #8839ef;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .kt {
+  color: #df8e1d;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .m {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .s {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .n {
+  color: black;
+}
+[data-theme="lofi"] .highlight .na {
+  color: #179299;
+}
+
+[data-theme="lofi"] .highlight .nb {
+  color: #179299;
+}
+[data-theme="lofi"] .highlight .nc {
+  color: #df8e1d;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .no {
+  color: #d20f39;
+}
+[data-theme="lofi"] .highlight .nd {
+  color: #8839ef;
+}
+[data-theme="lofi"] .highlight .ni {
+  color: #8839ef;
+}
+[data-theme="lofi"] .highlight .ne {
+  color: #d20f39;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .nf {
+  color: #1e66f5;
+}
+[data-theme="lofi"] .highlight .nl {
+  color: #df8e1d;
+}
+[data-theme="lofi"] .highlight .nn {
+  color: #df8e1d;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .nt {
+  color: #1e66f5;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .nv {
+  color: #4c4f69;
+}
+[data-theme="lofi"] .highlight .ow {
+  color: #04a5e5;
+  font-weight: bold;
+}
+[data-theme="lofi"] .highlight .mb {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .mf {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .mh {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .mi {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .mo {
+  color: #fe640b;
+}
+[data-theme="lofi"] .highlight .sa {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sb {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sc {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .dl {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sd {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .s2 {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .se {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sh {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .si {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sx {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .sr {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .s1 {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .ss {
+  color: #40a02b;
+}
+[data-theme="lofi"] .highlight .bp {
+  color: #179299;
+}
+[data-theme="lofi"] .highlight .fm {
+  color: #1e66f5;
+}
+[data-theme="lofi"] .highlight .vc {
+  color: #4c4f69;
+}
+[data-theme="lofi"] .highlight .vg {
+  color: #4c4f69;
+}
+[data-theme="lofi"] .highlight .vi {
+  color: #4c4f69;
+}
+[data-theme="lofi"] .highlight .vm {
+  color: #4c4f69;
+}
+
+[data-theme="black"] .highlight {
+  /* Dark theme - Mocha colors */
+  background: #1e1e2e;
+  color: #cdd6f4;
+}
+
+[data-theme="black"] .highlight .hll {
+  background-color: #f38ba8;
+}
+[data-theme="black"] .highlight .c {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .err {
+  color: #f38ba8;
+}
+[data-theme="black"] .highlight .k {
+  color: #cba6f7;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .o {
+  color: #89dceb;
+}
+[data-theme="black"] .highlight .ch {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .cm {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .cp {
+  color: #cba6f7;
+}
+[data-theme="black"] .highlight .cpf {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .c1 {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .cs {
+  color: #6c7086;
+  font-style: italic;
+}
+[data-theme="black"] .highlight .kc {
+  color: #fab387;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .kd {
+  color: #cba6f7;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .kn {
+  color: #cba6f7;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .kp {
+  color: #cba6f7;
+}
+[data-theme="black"] .highlight .kr {
+  color: #cba6f7;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .kt {
+  color: #f9e2af;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .m {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .s {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .na {
+  color: #94e2d5;
+}
+[data-theme="black"] .highlight .nb {
+  color: #94e2d5;
+}
+[data-theme="black"] .highlight .nc {
+  color: #f9e2af;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .no {
+  color: #f38ba8;
+}
+[data-theme="black"] .highlight .nd {
+  color: #cba6f7;
+}
+[data-theme="black"] .highlight .ni {
+  color: #cba6f7;
+}
+[data-theme="black"] .highlight .ne {
+  color: #f38ba8;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .nf {
+  color: #89b4fa;
+}
+[data-theme="black"] .highlight .nl {
+  color: #f9e2af;
+}
+[data-theme="black"] .highlight .nn {
+  color: #f9e2af;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .nt {
+  color: #89b4fa;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .nv {
+  color: #cdd6f4;
+}
+[data-theme="black"] .highlight .ow {
+  color: #89dceb;
+  font-weight: bold;
+}
+[data-theme="black"] .highlight .mb {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .mf {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .mh {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .mi {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .mo {
+  color: #fab387;
+}
+[data-theme="black"] .highlight .sa {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sb {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sc {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .dl {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sd {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .s2 {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .se {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sh {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .si {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sx {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .sr {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .s1 {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .ss {
+  color: #a6e3a1;
+}
+[data-theme="black"] .highlight .bp {
+  color: #94e2d5;
+}
+[data-theme="black"] .highlight .fm {
+  color: #89b4fa;
+}
+[data-theme="black"] .highlight .vc {
+  color: #cdd6f4;
+}
+[data-theme="black"] .highlight .vg {
+  color: #cdd6f4;
+}
+[data-theme="black"] .highlight .vi {
+  color: #cdd6f4;
+}
+[data-theme="black"] .highlight .vm {
+  color: #cdd6f4;
+}
+
+[data-theme="black"] .highlight .n {
+  color: white;
+}
+
+[data-theme="black"] .highlight .p {
+  color: white;
+}
+
+[data-theme="lofi"] .highlight .p {
+  color: black;
+}

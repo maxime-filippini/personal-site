@@ -2,6 +2,8 @@ import htpy as h
 from markupsafe import Markup
 
 from server.config import settings
+from server.html.svgs import moon
+from server.html.svgs import sun
 from server.html.utils import link
 from server.html.utils import posthog
 from server.schemas import PostMetadata
@@ -18,9 +20,15 @@ def root_layout(children: h.Node, *, theme: str, title: str, description: str):
             h.title[title],
             h.meta(property="og:description", content=description),
             h.link(rel="stylesheet", href="/static/output.css"),
-            h.link(rel="stylesheet", href="/static/pygments-latte.css"),
+            h.link(rel="stylesheet", href="/static/pygments-theme-aware.css"),
             posthog_script,
             h.script(src="/static/htmx.min.js"),
+            h.script(
+                src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+                defer=True,
+            ),
+            h.script(src="/static/js/alpine_stuff.js"),
+            h.script(src="/static/js/theme_init.js"),
         ],
         children,
         Markup("""
@@ -42,7 +50,7 @@ document.addEventListener('htmx:afterSwap', function() {
 @h.with_children
 def main_layout(children: h.Node, *, theme: str, title: str):
     return root_layout(theme=theme, title=title, description="")[
-        h.body(class_="font-mono bg-stone-50 min-h-screen")[
+        h.body(class_="font-mono min-h-screen bg-base-100")[
             h.div(class_="p-8")[children]
         ],
     ]
@@ -53,10 +61,10 @@ def with_topnav(
     children: h.Node, *, theme: str, title: str, description: str
 ) -> h.Renderable:
     return root_layout(theme=theme, title=title, description=description)[
-        h.body(class_="font-mono bg-stone-50 min-h-screen")[
+        h.body(class_="font-mono min-h-screen bg-base-100")[
             h.div(class_="pt-18")[
                 h.div(
-                    class_="w-full h-12 py-4 flex items-center sm:justify-between justify-center px-8 border-b border-stone-200 bg-stone-100 fixed top-0"
+                    class_="w-full h-12 py-4 flex items-center sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
                 )[
                     h.a(class_="text-lg sm:block hidden link link-hover", href="/")[
                         "Maxime Filippini"
@@ -66,6 +74,22 @@ def with_topnav(
                         link(name="CV", href="/cv/"),
                         link(name="Blog", href="/posts/"),
                         link(name="Contact me", href="/contact/"),
+                        h.button(
+                            class_="rounded-full bg-base-100 border border-base-300 p-2 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-black hover:stroke-white",
+                            x_data=True,
+                            **{
+                                "@click": "$store.darkMode.toggle()",
+                                "x-show": "!$store.darkMode.on",
+                            },
+                        )[moon()],
+                        h.button(
+                            class_="rounded-full bg-base-100 border border-base-300 p-2 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-white hover:stroke-black",
+                            x_data=True,
+                            **{
+                                "@click": "$store.darkMode.toggle()",
+                                "x-show": "$store.darkMode.on",
+                            },
+                        )[sun()],
                     ],
                 ],
                 h.div(class_="px-8")[children],

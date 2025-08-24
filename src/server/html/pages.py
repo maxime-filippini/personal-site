@@ -12,19 +12,27 @@ from server.schemas import PostMetadata
 def home_page(theme: str):
     return main_layout(theme=theme, title="Maxime Filippini")[
         h.div(
-            class_="flex flex-col h-screen items-center justify-center gap-8 max-w-2xl mx-auto"
+            class_="flex flex-col sm:h-screen items-center justify-center gap-8 max-w-2xl mx-auto"
         )[
             h.h1(
-                class_="sm:text-5xl text-3xl text-center font-bold border border-2 border-black p-8 bg-white w-full",
+                class_="sm:text-5xl text-3xl text-center font-bold border border-2 border-base-content p-8 bg-base-100 w-full",
             )["Maxime Filippini"],
             h.div(
                 class_="flex w-full justify-center items-center",
             )[
                 h.h2(
-                    class_="sm:text-2xl text-xl border-r border-black px-4 w-1/2 text-center"
+                    class_="sm:text-2xl text-xl border-r border-base-content px-4 w-1/2 text-center"
                 )["Risk manager"],
                 h.h2(class_="sm:text-2xl text-xl px-4 w-1/2 text-center")[
                     "Software developer"
+                ],
+            ],
+            h.div(
+                class_="border-y border-base-300 p-8 w-full sm:text-lg text-sm text-base-content/70 flex flex-col gap-2"
+            )[
+                h.p(class_="text-center")["👋🏼 Welcome to my personal website!"],
+                h.p(class_="text-center")[
+                    "If you find my posts interesting or are interested in my experience, feel free to contact me or connect with me on LinkedIn!"
                 ],
             ],
             h.div(
@@ -59,11 +67,11 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
             h.h2(class_="text-2xl font-semibold mb-2")[
                 h.a(
                     href=f"/posts/{post.slug}",
-                    class_="link link-hover text-primary",
+                    class_="link link-hover",
                     hx_boost="true",
                 )[post.title]
             ],
-            h.p(class_="text-xs mb-2 text-stone-400")[_days_since_post(post)],
+            h.p(class_="text-xs mb-2 text-base-content/60")[_days_since_post(post)],
             h.p[post.abstract],
         ]
         for post in reversed(sorted(posts, key=lambda item: item.last_update))
@@ -99,7 +107,7 @@ def _exp_block(
                 h.p(class_="font-semibold")[f"({grade})"],
             ],
         ],
-        h.div(class_="text-base italic text-stone-500")[children],
+        h.div(class_="text-base italic text-base-content/70")[children],
     ]
 
 
@@ -119,7 +127,7 @@ def _edu_block(
                 h.p(class_="font-semibold")[institution],
             ],
         ],
-        h.div(class_="text-base italic text-stone-500")[children],
+        h.div(class_="text-base italic text-base-content/70")[children],
     ]
 
 
@@ -145,10 +153,10 @@ def cv_page(theme: str):
         h.div(class_="max-w-4xl mx-auto")[
             h.div(class_="mb-8")[
                 h.h1(
-                    class_="sm:text-5xl text-3xl font-bold border border-2 border-black p-8 bg-white mb-4 text-center",
+                    class_="sm:text-5xl text-3xl font-bold border border-2 border-base-content p-8 bg-base-100 mb-4 text-center",
                 )["Maxime Filippini"],
                 h.div(class_="flex gap-4 justify-center sm:text-2xl text-xl")[
-                    h.p(class_="border-r border-black px-4 text-center w-1/2")[
+                    h.p(class_="border-r border-base-content px-4 text-center w-1/2")[
                         "Risk manager"
                     ],
                     h.p(class_="px-4 text-center w-1/2")["Software developer"],
@@ -339,7 +347,7 @@ def cv_page(theme: str):
                         ),
                     ],
                 ],
-                h.section(class_="pb-8 border-b border-stone-200")[
+                h.section(class_="pb-8 border-b border-base-300")[
                     h.h2(class_="text-2xl font-semibold mb-4")["Languages"],
                     h.div(class_="flex flex-col gap-2")[
                         h.p["French (Native)"],
