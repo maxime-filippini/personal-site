@@ -77,7 +77,7 @@ article a[href^="#"]:after {
 @plugin "./daisyui-theme.js" {
   name: "dark";
   default: false;
-  prefersdark: true;
+  prefersdark: false;
   color-scheme: "dark";
   --color-base-100: oklch(25.33% 0.016 252.42);
   --color-base-200: oklch(23.26% 0.014 253.1);
@@ -112,7 +112,7 @@ article a[href^="#"]:after {
 @plugin "./daisyui-theme.js" {
   name: "black";
   default: false;
-  prefersdark: true;
+  prefersdark: false;
   color-scheme: "dark";
   --color-base-100: oklch(0% 0 0);
   --color-base-200: oklch(19% 0 0);
