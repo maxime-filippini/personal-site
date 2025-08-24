@@ -369,14 +369,14 @@ def contact_page(theme: str):
                     "To contact me, send me an ",
                     h.span[
                         h.a(
-                            class_="link link-primary hover:font-semibold",
+                            class_="link hover:font-semibold",
                             href="mailto:maxime.filippini@gmail.com",
                         )["email"]
                     ],
                     " or connect and message me on ",
                     h.span[
                         h.a(
-                            class_="link link-primary hover:font-semibold",
+                            class_="link hover:font-semibold",
                             href="https://www.linkedin.com/in/maxime-filippini/",
                         )["LinkedIn"]
                     ],

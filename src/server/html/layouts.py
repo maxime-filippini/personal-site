@@ -64,18 +64,18 @@ def with_topnav(
         h.body(class_="font-mono min-h-screen bg-base-100")[
             h.div(class_="pt-18")[
                 h.div(
-                    class_="w-full h-12 py-4 flex items-center sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
+                    class_="w-full h-14 py-4 flex items-center sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
                 )[
                     h.a(class_="text-lg sm:block hidden link link-hover", href="/")[
                         "Maxime Filippini"
                     ],
-                    h.div(class_="flex gap-6 items-center")[
+                    h.div(class_="flex gap-6 items-center sm:text-base text-sm")[
                         link(name="Home", href="/"),
                         link(name="CV", href="/cv/"),
                         link(name="Blog", href="/posts/"),
                         link(name="Contact me", href="/contact/"),
                         h.button(
-                            class_="rounded-full bg-base-100 border border-base-300 p-2 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-black hover:stroke-white",
+                            class_="rounded-full bg-base-100 border border-base-300 p-1 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-black hover:stroke-white",
                             x_data=True,
                             **{
                                 "@click": "$store.darkMode.toggle()",
@@ -83,7 +83,7 @@ def with_topnav(
                             },
                         )[moon()],
                         h.button(
-                            class_="rounded-full bg-base-100 border border-base-300 p-2 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-white hover:stroke-black",
+                            class_="rounded-full bg-base-100 border border-base-300 p-1 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-white hover:stroke-black",
                             x_data=True,
                             **{
                                 "@click": "$store.darkMode.toggle()",

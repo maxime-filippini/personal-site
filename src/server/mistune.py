@@ -74,7 +74,7 @@ class BlogRenderer(mistune.HTMLRenderer):
             parsed, _ = markdown_parser.parse(code)
             print(parsed)
             return str(
-                h.div(class_="bg-base-200 py-2 px-4")[
+                h.div(class_="bg-base-200 border-accent border py-2 px-4")[
                     h.p(class_="font-bold")["Note"], Markup(parsed)
                 ]
             )
