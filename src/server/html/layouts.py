@@ -64,7 +64,7 @@ def with_topnav(
         h.body(class_="font-mono min-h-screen bg-base-100")[
             h.div(class_="pt-18")[
                 h.div(
-                    class_="w-full h-14 py-4 flex items-center sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
+                    class_="w-full h-14 py-4 flex items-center z-[999] sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
                 )[
                     h.a(class_="text-lg sm:block hidden link link-hover", href="/")[
                         "Maxime Filippini"

@@ -10,6 +10,7 @@
 @theme {
   --font-mono: "Roboto Mono", mono;
 }
+
 /* 
 body {
   @apply bg-base;
@@ -21,6 +22,30 @@ body {
     --tw-prose-pre-code: theme("colors.base-300");
   }
 } */
+
+.lint-error {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100% !important;
+}
+
+.lint-error::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: red;
+}
+
+.lint-error,
+.lint-error * {
+  background-color: oklch(93.6% 0.032 17.717) !important;
+  color: black !important;
+  font-weight: normal !important;
+}
 
 a[href^="http"]:after,
 a[href^="https"]:after {

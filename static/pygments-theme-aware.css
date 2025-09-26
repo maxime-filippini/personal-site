@@ -1,4 +1,5 @@
 /* Theme-aware Pygments styles using DaisyUI variables */
+
 [data-theme="lofi"] .highlight {
   /* Light theme - Latte colors */
   background: #eff1f5;

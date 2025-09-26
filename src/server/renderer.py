@@ -40,7 +40,9 @@ class BaseRenderer(abc.ABC):
 
 class BlogPostRenderer(BaseRenderer):
     def __init__(self):
-        self.mistune = mistune.create_markdown(escape=False, renderer=BlogRenderer())
+        self.mistune = mistune.create_markdown(
+            escape=False, renderer=BlogRenderer(), plugins=["table"]
+        )
 
     def to_html(self, markdown_content: str, metadata: PostMetadata) -> h.Renderable:
         print(markdown_content)
@@ -66,7 +68,7 @@ class BlogPostRenderer(BaseRenderer):
 
         return post_layout(theme="lofi", metadata=metadata)[
             h.article(
-                class_="prose prose-pre:bg-base-200 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-accent prose-img:border-accent prose-img:border prose-a:hover:font-bold prose-a:duration-100"
+                class_="prose prose-pre:bg-base-200 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-accent prose-img:border-accent prose-img:border prose-img:w-full prose-a:hover:font-bold prose-a:duration-100"
             )[
                 h.h1[metadata.title],
                 *elts,

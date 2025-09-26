@@ -7,11 +7,8 @@
     --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
     --font-mono: "Roboto Mono", mono;
-    --color-red-200: oklch(88.5% 0.062 18.334);
     --color-stone-100: oklch(97% 0.001 106.424);
-    --color-stone-300: oklch(86.9% 0.005 56.366);
     --color-stone-400: oklch(70.9% 0.01 56.259);
-    --color-stone-500: oklch(55.3% 0.013 58.071);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -3879,6 +3876,9 @@
     button {
       cursor: pointer;
     }
+  }
+  .z-\[999\] {
+    z-index: 999;
   }
   .tab-content {
     order: var(--tabcontent-order);
@@ -8271,6 +8271,11 @@
       color: var(--color-black);
     }
   }
+  .prose-img\:w-full {
+    & :is(:where(img):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+      width: 100%;
+    }
+  }
   .prose-img\:border {
     & :is(:where(img):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       border-style: var(--tw-border-style);
@@ -8282,6 +8287,26 @@
       border-color: var(--color-accent);
     }
   }
+}
+.lint-error {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100% !important;
+}
+.lint-error::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: red;
+}
+.lint-error, .lint-error * {
+  background-color: oklch(93.6% 0.032 17.717) !important;
+  color: black !important;
+  font-weight: normal !important;
 }
 a[href^="http"]:after, a[href^="https"]:after {
   margin-left: calc(var(--spacing) * 1);

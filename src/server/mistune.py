@@ -4,6 +4,7 @@ from html import escape
 
 import htpy as h
 import mistune
+from bs4 import BeautifulSoup
 from catppuccin.extras.pygments import LatteStyle
 from markupsafe import Markup
 from pygments import highlight
@@ -55,6 +56,11 @@ class BlogRenderer(mistune.HTMLRenderer):
             left, right = opt.split("=", 1)
             parsed_opts[left] = right
 
+        if "lint" in parsed_opts:
+            parsed_opts["lint"] = [int(ln) for ln in parsed_opts["lint"].split(" ")]
+
+        print(parsed_opts)
+
         if lang == "custom":
             elt = parsed_opts.pop("elt")
             path = parsed_opts.pop("__path")
@@ -71,12 +77,37 @@ class BlogRenderer(mistune.HTMLRenderer):
 
         if lang == "note":
             markdown_parser = mistune.create_markdown(renderer=self, escape=False)
-            parsed, _ = markdown_parser.parse(code)
-            print(parsed)
+            code_modified = code.replace("```", "````")
+            parsed, _ = markdown_parser.parse(code_modified)
             return str(
                 h.div(class_="bg-base-200 border-accent border py-2 px-4")[
                     h.p(class_="font-bold")["Note"], Markup(parsed)
                 ]
             )
 
-        return highlight(code, lexer, HtmlFormatter(wrapcode=True, style=LatteStyle))
+        if lang == "callout":
+            markdown_parser = mistune.create_markdown(renderer=self, escape=False)
+            parsed, _ = markdown_parser.parse(code)
+            return str(
+                h.div(class_="bg-base-200 border-accent border py-2 px-4")[
+                    Markup(parsed)
+                ]
+            )
+
+        highlighted = highlight(
+            code,
+            lexer,
+            HtmlFormatter(wrapcode=True, style=LatteStyle, linespans="line"),
+        )
+
+        # Post formatting for lint lines
+        if lint_lines := parsed_opts.get("lint"):
+            soup = BeautifulSoup(highlighted)
+            for ln in lint_lines:
+                span = soup.find(id=f"line-{ln}")
+                if span:
+                    span["class"] = span.get("class", []) + ["lint-error"]  # type: ignore
+
+            return str(soup)
+
+        return highlighted
