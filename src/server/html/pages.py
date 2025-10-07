@@ -324,7 +324,7 @@ def cv_page(theme: str):
                         ),
                         _tech_block(
                             name="Development tools",
-                            lst=["Git", "Terminal utilities (UNIX)", "Docker", "tbd"],
+                            lst=["Git", "Terminal utilities (UNIX)", "Docker"],
                         ),
                         _tech_block(
                             name="Back-end",
