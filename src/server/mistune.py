@@ -85,6 +85,19 @@ class BlogRenderer(mistune.HTMLRenderer):
                 ]
             )
 
+        if lang == "youtube":
+            return str(
+                h.iframe(
+                    class_="w-full",
+                    height="400",
+                    src=parsed_opts["url"],
+                    frameborder="0",
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                    referrerpolicy="strict-origin-when-cross-origin",
+                    allowfullscreen=True,
+                )
+            )
+
         if lang == "callout":
             markdown_parser = mistune.create_markdown(renderer=self, escape=False)
             parsed, _ = markdown_parser.parse(code)
