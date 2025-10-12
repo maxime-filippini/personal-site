@@ -71,7 +71,9 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
                     hx_boost="true",
                 )[post.title]
             ],
-            h.p(class_="text-xs mb-2 text-base-content/60")[_days_since_post(post)],
+            h.p(class_="text-xs mb-2 text-base-content/60")[
+                f"Posed on {post.posted_on.strftime('%Y-%m-%d')}"
+            ],
             h.p[post.abstract],
         ]
         for post in reversed(sorted(posts, key=lambda item: item.last_update))
