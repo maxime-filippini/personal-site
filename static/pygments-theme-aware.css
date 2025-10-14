@@ -399,3 +399,7 @@
 [data-theme="lofi"] .highlight .p {
   color: black;
 }
+
+[data-theme="black"] span {
+  color: white;
+}
