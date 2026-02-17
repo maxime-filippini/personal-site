@@ -45,7 +45,6 @@ class BlogPostRenderer(BaseRenderer):
         )
 
     def to_html(self, markdown_content: str, metadata: PostMetadata) -> h.Renderable:
-        print(markdown_content)
         if metadata.last_update == metadata.posted_on:
             class_ = "text-sm border-y border-stone-400 py-4"
             add_update = False
@@ -66,12 +65,14 @@ class BlogPostRenderer(BaseRenderer):
                 ]
             )
 
+        html = self.mistune(markdown_content)
+
         return post_layout(theme="lofi", metadata=metadata)[
             h.article(
                 class_="prose prose-pre:bg-base-200 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-accent prose-img:border-accent prose-img:border prose-img:w-full prose-a:hover:font-bold prose-a:duration-100"
             )[
                 h.h1[metadata.title],
                 *elts,
-                Markup(markdown_content),
+                Markup(html),
             ],
         ]

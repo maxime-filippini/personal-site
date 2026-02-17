@@ -1,5 +1,7 @@
+import dataclasses
 import datetime
 
+import htpy as h
 from pydantic import BaseModel
 from pydantic import ConfigDict
 
@@ -14,3 +16,9 @@ class PostMetadata(BaseModel):
 
     abstract: str
     draft: bool = True
+
+
+@dataclasses.dataclass
+class Post:
+    metadata: PostMetadata
+    html: h.Renderable

@@ -2,11 +2,11 @@ import datetime
 
 import htpy as h
 
-from server.config import settings
 from server.html.layouts import main_layout
 from server.html.layouts import with_topnav
 from server.html.utils import fancy_link
 from server.schemas import PostMetadata
+from server.settings import settings
 
 
 def home_page(theme: str):

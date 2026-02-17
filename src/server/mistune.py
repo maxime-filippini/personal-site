@@ -59,8 +59,6 @@ class BlogRenderer(mistune.HTMLRenderer):
         if "lint" in parsed_opts:
             parsed_opts["lint"] = [int(ln) for ln in parsed_opts["lint"].split(" ")]
 
-        print(parsed_opts)
-
         if lang == "custom":
             elt = parsed_opts.pop("elt")
             path = parsed_opts.pop("__path")
@@ -115,7 +113,7 @@ class BlogRenderer(mistune.HTMLRenderer):
 
         # Post formatting for lint lines
         if lint_lines := parsed_opts.get("lint"):
-            soup = BeautifulSoup(highlighted)
+            soup = BeautifulSoup(highlighted, features="html.parser")
             for ln in lint_lines:
                 span = soup.find(id=f"line-{ln}")
                 if span:
