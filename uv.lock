@@ -393,6 +393,47 @@ wheels = [
 ]
 
 [[package]]
+name = "personal-site"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "cachetools" },
+    { name = "catppuccin", extra = ["pygments"] },
+    { name = "fastapi", extra = ["standard"] },
+    { name = "htpy" },
+    { name = "jinja2" },
+    { name = "mistune" },
+    { name = "pydantic-settings" },
+    { name = "pygments" },
+    { name = "python-frontmatter" },
+    { name = "r2-client" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "debugpy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4", specifier = ">=4.13.5" },
+    { name = "cachetools", specifier = ">=6.1.0" },
+    { name = "catppuccin", extras = ["pygments"], specifier = ">=2.5.0" },
+    { name = "fastapi", extras = ["standard"], specifier = ">=0.129.0" },
+    { name = "htpy", specifier = ">=25.8.1" },
+    { name = "jinja2", specifier = ">=3.1.0" },
+    { name = "mistune", specifier = ">=3.1.3" },
+    { name = "pydantic-settings", specifier = ">=2.12.0" },
+    { name = "pygments", specifier = ">=2.19.2" },
+    { name = "python-frontmatter", specifier = ">=1.1.0" },
+    { name = "r2-client", editable = "../r2_client" },
+]
+
+[package.metadata.requires-dev]
+dev = [{ name = "debugpy", specifier = ">=1.8.16" }]
+
+[[package]]
 name = "polars"
 version = "1.38.1"
 source = { registry = "https://pypi.org/simple" }
@@ -566,7 +607,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/54/ed/79a089b6be93607fa
 [[package]]
 name = "r2-client"
 version = "0.1.0"
-source = { editable = "../../r2_client" }
+source = { editable = "../r2_client" }
 dependencies = [
     { name = "boto3" },
     { name = "polars" },
@@ -669,48 +710,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/59/eb/1b497650eb564701f
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ca/63/2c6daf59d86b1c30600bff679d039f57fd1932af82c43c0bde1cbc55e8d4/sentry_sdk-2.52.0-py2.py3-none-any.whl", hash = "sha256:931c8f86169fc6f2752cb5c4e6480f0d516112e78750c312e081ababecbaf2ed", size = 435547, upload-time = "2026-02-04T15:03:51.567Z" },
 ]
-
-[[package]]
-name = "server"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "beautifulsoup4" },
-    { name = "cachetools" },
-    { name = "catppuccin", extra = ["pygments"] },
-    { name = "fastapi", extra = ["standard"] },
-    { name = "htpy" },
-    { name = "jinja2" },
-    { name = "mistune" },
-    { name = "pydantic-settings" },
-    { name = "pygments" },
-    { name = "python-frontmatter" },
-    { name = "r2-client" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "debugpy" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "beautifulsoup4", specifier = ">=4.13.5" },
-    { name = "cachetools", specifier = ">=6.1.0" },
-    { name = "catppuccin", extras = ["pygments"], specifier = ">=2.5.0" },
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.129.0" },
-    { name = "htpy", specifier = ">=25.8.1" },
-    { name = "jinja2", specifier = ">=3.1.0" },
-    { name = "mistune", specifier = ">=3.1.3" },
-    { name = "pydantic-settings", specifier = ">=2.12.0" },
-    { name = "pygments", specifier = ">=2.19.2" },
-    { name = "python-frontmatter", specifier = ">=1.1.0" },
-    { name = "r2-client", editable = "../../r2_client" },
-    { name = "server", editable = "." },
-]
-
-[package.metadata.requires-dev]
-dev = [{ name = "debugpy", specifier = ">=1.8.16" }]
 
 [[package]]
 name = "shellingham"

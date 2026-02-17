@@ -1,7 +1,7 @@
 import htpy as h
 from markupsafe import Markup
 
-from server.html.svgs import link_arrow
+from personal_site.html.svgs import link_arrow
 
 
 def fancy_link(text: str, href: str, last: bool = False):

@@ -6,9 +6,9 @@ import htpy as h
 import mistune
 from markupsafe import Markup
 
-from server.html.layouts import post_layout
-from server.mistune import BlogRenderer
-from server.schemas import PostMetadata
+from personal_site.html.layouts import post_layout
+from personal_site.mistune import BlogRenderer
+from personal_site.schemas import PostMetadata
 
 LEVEL_HEADINGS_MAP = {1: h.h1, 2: h.h2, 3: h.h3, 4: h.h4, 5: h.h5, 6: h.h6}
 

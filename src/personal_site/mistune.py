@@ -12,7 +12,7 @@ from pygments.formatters import HtmlFormatter
 from pygments.lexers import TextLexer
 from pygments.lexers import get_lexer_by_name
 
-from server.html.svgs import permalink
+from personal_site.html.svgs import permalink
 
 LEVEL_HEADINGS_MAP = {1: h.h1, 2: h.h2, 3: h.h3, 4: h.h4, 5: h.h5, 6: h.h6}
 

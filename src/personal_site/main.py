@@ -7,17 +7,17 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from r2_client import Client
 
-from server.constants import CONTENT_DIR
-from server.constants import DATA_DIR
-from server.constants import RENDERER
-from server.html.pages import contact_page
-from server.html.pages import cv_page
-from server.html.pages import home_page
-from server.html.pages import posts_index
-from server.posts import get_posts_from_local_dir
-from server.schemas import Post
-from server.settings import settings
-from server.webhook import router as webhook_router
+from personal_site.constants import CONTENT_DIR
+from personal_site.constants import DATA_DIR
+from personal_site.constants import RENDERER
+from personal_site.html.pages import contact_page
+from personal_site.html.pages import cv_page
+from personal_site.html.pages import home_page
+from personal_site.html.pages import posts_index
+from personal_site.posts import get_posts_from_local_dir
+from personal_site.schemas import Post
+from personal_site.settings import settings
+from personal_site.webhook import router as webhook_router
 
 r2_client = Client(
     url=settings.CLOUDFLARE_R2_URL,

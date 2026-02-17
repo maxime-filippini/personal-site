@@ -3,9 +3,9 @@ import pathlib
 import frontmatter
 from r2_client import Client
 
-from server.renderer import BaseRenderer
-from server.schemas import Post
-from server.schemas import PostMetadata
+from personal_site.renderer import BaseRenderer
+from personal_site.schemas import Post
+from personal_site.schemas import PostMetadata
 
 
 def load_single_post_from_bucket(

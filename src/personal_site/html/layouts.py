@@ -1,12 +1,12 @@
 import htpy as h
 from markupsafe import Markup
 
-from server.html.svgs import moon
-from server.html.svgs import sun
-from server.html.utils import link
-from server.html.utils import posthog
-from server.schemas import PostMetadata
-from server.settings import settings
+from personal_site.html.svgs import moon
+from personal_site.html.svgs import sun
+from personal_site.html.utils import link
+from personal_site.html.utils import posthog
+from personal_site.schemas import PostMetadata
+from personal_site.settings import settings
 
 
 @h.with_children

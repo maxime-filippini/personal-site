@@ -12,15 +12,15 @@ from fastapi import Header
 from fastapi import HTTPException
 from fastapi import Request
 
-from server.constants import CONTENT_DIR
-from server.constants import RENDERER
-from server.constants import VERSION_FILE
-from server.constants import get_preview_content_dir
-from server.constants import get_preview_version_file
-from server.utils import current_sha
-from server.utils import get_or_render
-from server.utils import invalidate
-from server.utils import run
+from personal_site.constants import CONTENT_DIR
+from personal_site.constants import RENDERER
+from personal_site.constants import VERSION_FILE
+from personal_site.constants import get_preview_content_dir
+from personal_site.constants import get_preview_version_file
+from personal_site.utils import current_sha
+from personal_site.utils import get_or_render
+from personal_site.utils import invalidate
+from personal_site.utils import run
 
 router = APIRouter()
 WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "change-me")  # set in env
