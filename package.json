@@ -1,12 +1,26 @@
 {
   "name": "personal_site",
   "module": "index.ts",
-  "type": "module",
-  "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/bun": "latest",
+    "cz-conventional-changelog": "^3.3.0",
+    "daisyui": "^5.5.18",
+    "tailwindcss": "^4.1.18"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "private": true,
+  "scripts": {
+    "serve": "uv run fastapi dev --entrypoint personal_site.main:app",
+    "tw:watch": "bunx @tailwindcss/cli -i src/app.css -o static/app.css --watch"
+  },
+  "type": "module",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

@@ -19,7 +19,7 @@ def root_layout(children: h.Node, *, theme: str, title: str, description: str):
             h.meta(name="viewport", content="width=device-width, initial-scale=1.0"),
             h.title[title],
             h.meta(property="og:description", content=description),
-            h.link(rel="stylesheet", href="/static/output.css"),
+            h.link(rel="stylesheet", href="/static/app.css"),
             h.link(rel="stylesheet", href="/static/pygments-theme-aware.css"),
             h.link(
                 rel="icon",
