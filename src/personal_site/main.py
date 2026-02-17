@@ -7,7 +7,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from r2_client import Client
 
-from personal_site.constants import CONTENT_DIR
 from personal_site.constants import DATA_DIR
 from personal_site.constants import RENDERER
 from personal_site.html.pages import contact_page
@@ -40,11 +39,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-app.mount(
-    "/components",
-    StaticFiles(directory=str(CONTENT_DIR / "svelte/dist/components")),
-    name="components",
-)
+# app.mount(
+#     "/components",
+#     StaticFiles(directory=str(CONTENT_DIR / "svelte/dist/components")),
+#     name="components",
+# )
 
 app.include_router(webhook_router)
 
