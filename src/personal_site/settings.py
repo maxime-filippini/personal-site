@@ -12,6 +12,7 @@ class Settings(pydantic_settings.BaseSettings):
     CLOUDFLARE_R2_SECRET: str
     CLOUDFLARE_R2_URL: str
     CLOUDFLARE_ACCOUNT_ID: str
+    R2_PUBLIC_URL: str
 
     @property
     def polars_storage_options(self):
