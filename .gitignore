@@ -208,3 +208,4 @@ data/
 .DS_Store
 
 .todo
+node_modules/
