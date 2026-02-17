@@ -8,17 +8,6 @@ from personal_site.schemas import Post
 from personal_site.schemas import PostMetadata
 
 
-def load_single_post_from_bucket(
-    client: Client, bucket: str, slug: str, renderer: BaseRenderer
-):
-    obj = client.get_object(bucket_name=bucket, object_name=f"{slug}.md")
-
-    if obj is None:
-        raise KeyError
-
-    content = client.read_object(obj)
-
-
 def get_posts_from_bucket(
     client: Client, bucket: str, renderer: BaseRenderer
 ) -> dict[str, Post]:

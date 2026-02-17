@@ -18,7 +18,6 @@ from personal_site.posts import get_posts_from_local_dir
 from personal_site.schemas import Post
 from personal_site.settings import Settings
 from personal_site.settings import settings
-from personal_site.webhook import router as webhook_router
 
 r2_client = Client(
     url=settings.CLOUDFLARE_R2_URL,
@@ -36,8 +35,6 @@ blog_posts: dict[str, Post] = get_posts_from_local_dir(
 def app_factory(settings: Settings) -> FastAPI:
     app = FastAPI()
     app.mount("/static", StaticFiles(directory="static"), name="static")
-
-    app.include_router(webhook_router)
 
     if settings.BLOG_PROD:
         click.echo(click.style("\nBlog running in PROD mode...", fg="green"))
