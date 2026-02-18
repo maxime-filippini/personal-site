@@ -114,6 +114,18 @@ def app_factory(settings: Settings) -> FastAPI:
 
         repository.update_post(slug)
 
+    @app.post("/posts/update")
+    async def update_all_posts(
+        credentials: Annotated[HTTPBasicCredentials, Depends(security)],
+    ):
+        if not (
+            credentials.username == settings.ADMIN_USER
+            and credentials.password == settings.ADMIN_PASSWORD
+        ):
+            raise HTTPException(401)
+
+        repository.update_all_posts()
+
     return app
 
 
