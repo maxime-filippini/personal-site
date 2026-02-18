@@ -36,4 +36,4 @@ force-single-line = true
 dev-dependencies = ["debugpy>=1.8.16"]
 
 [tool.uv.sources]
-r2-client = { path = "../r2_client", editable = true }
+r2-client = { git = "https://github.com/maxime-filippini/r2_client" }

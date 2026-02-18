@@ -45,6 +45,10 @@ class PostRepository(abc.ABC):
     @abc.abstractmethod
     def update_post(self, slug: str) -> None: ...
 
+    def update_all_posts(self) -> None:
+        for slug in self.posts.keys():
+            self.update_post(slug)
+
     def process_post_markdown(self, slug: str, markdown: str) -> Post:
         post = frontmatter.loads(markdown)
         metadata = PostMetadata(slug=slug, **dict(post.metadata))  # type: ignore
@@ -78,6 +82,7 @@ class Bucket(PostRepository):
         objs = [
             self.client.read_object(obj)
             for obj in self.client.list_objects(self.bucket_name)
+            if obj.key.endswith(".md")
         ]
         posts: dict[str, Post] = {}
 
