@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 import htpy as h
 from markupsafe import Markup
 
@@ -5,8 +7,10 @@ from personal_site.html.svgs import moon
 from personal_site.html.svgs import sun
 from personal_site.html.utils import link
 from personal_site.html.utils import posthog
-from personal_site.schemas import PostMetadata
 from personal_site.settings import settings
+
+if TYPE_CHECKING:
+    from personal_site.posts import PostMetadata
 
 
 @h.with_children

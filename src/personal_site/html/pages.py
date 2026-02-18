@@ -5,7 +5,7 @@ import htpy as h
 from personal_site.html.layouts import main_layout
 from personal_site.html.layouts import with_topnav
 from personal_site.html.utils import fancy_link
-from personal_site.schemas import PostMetadata
+from personal_site.posts import PostMetadata
 from personal_site.settings import settings
 
 

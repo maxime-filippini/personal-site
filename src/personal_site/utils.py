@@ -7,8 +7,8 @@ import subprocess
 from cachetools import LRUCache
 
 from personal_site.constants import VERSION_FILE
+from personal_site.posts import PostMetadata
 from personal_site.renderer import BaseRenderer
-from personal_site.schemas import PostMetadata
 
 cache: LRUCache[str, tuple[str, str, PostMetadata]] = LRUCache(maxsize=2000)
 locks: dict[str, asyncio.Lock] = {}

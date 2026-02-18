@@ -6,9 +6,10 @@ import htpy as h
 import mistune
 from markupsafe import Markup
 
+from personal_site.constants import BLOG_THEME
 from personal_site.html.layouts import post_layout
 from personal_site.mistune import BlogRenderer
-from personal_site.schemas import PostMetadata
+from personal_site.posts import PostMetadata
 
 LEVEL_HEADINGS_MAP = {1: h.h1, 2: h.h2, 3: h.h3, 4: h.h4, 5: h.h5, 6: h.h6}
 
@@ -67,7 +68,7 @@ class BlogPostRenderer(BaseRenderer):
 
         html = self.mistune(markdown_content)
 
-        return post_layout(theme="lofi", metadata=metadata)[
+        return post_layout(theme=BLOG_THEME, metadata=metadata)[
             h.article(
                 class_="prose prose-pre:bg-base-200 prose-pre:rounded-none prose-pre:text-black prose-stone h-full w-full mt-8 prose-pre:border prose-pre:border-accent prose-img:border-accent prose-img:border prose-img:w-full prose-a:hover:font-bold prose-a:duration-100"
             )[
