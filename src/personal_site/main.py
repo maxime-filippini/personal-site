@@ -12,7 +12,6 @@ from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPBasic
 from fastapi.security import HTTPBasicCredentials
 from fastapi.staticfiles import StaticFiles
-from r2_client import Client
 
 from personal_site import posts
 from personal_site.constants import BLOG_THEME
@@ -21,6 +20,7 @@ from personal_site.html.pages import contact_page
 from personal_site.html.pages import cv_page
 from personal_site.html.pages import home_page
 from personal_site.html.pages import posts_index
+from personal_site.r2_client import Client
 from personal_site.renderer import BlogPostRenderer
 from personal_site.settings import Settings
 from personal_site.settings import settings
