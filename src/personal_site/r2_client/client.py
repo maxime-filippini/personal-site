@@ -3,7 +3,6 @@ import datetime
 import fnmatch
 import pathlib
 from tempfile import TemporaryDirectory
-from typing import Literal
 
 import boto3
 import botocore
@@ -22,12 +21,8 @@ class ListObjectsResponse(pydantic.BaseModel):
 
 
 class Object(pydantic.BaseModel):
-    bucket: str
+    bucket: str = pydantic.Field(alias="Bucket")
     key: str = pydantic.Field(alias="Key")
-    last_modified: datetime.datetime = pydantic.Field(alias="LastModified")
-    etag: str = pydantic.Field(alias="ETag")
-    size: int = pydantic.Field(alias="Size")
-    storage_class: Literal["STANDARD"] = pydantic.Field(alias="StorageClass")
 
 
 class ReadObject(pydantic.BaseModel):
@@ -76,7 +71,7 @@ class Client:
         resp = self._client.list_objects_v2(Bucket=bucket_name)
 
         for obj in resp.get("Contents", []):
-            obj["bucket"] = bucket_name
+            obj["Bucket"] = bucket_name
 
         return ListObjectsResponse.model_validate(resp).contents
 

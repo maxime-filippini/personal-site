@@ -8,7 +8,8 @@ import frontmatter
 import htpy as h
 from pydantic import BaseModel
 from pydantic import ConfigDict
-from r2_client import Client
+
+from personal_site.r2_client import Client
 
 if TYPE_CHECKING:
     from personal_site.renderer import BaseRenderer
@@ -88,7 +89,8 @@ class Bucket(PostRepository):
 
         for obj in objs:
             post = self.process_post_markdown(
-                slug=obj.object_.key.removesuffix(".md"), markdown=obj.body
+                slug=obj.object_.key.removeprefix("posts/").removesuffix(".md"),
+                markdown=obj.body,
             )
             posts[post.metadata.slug] = post
 

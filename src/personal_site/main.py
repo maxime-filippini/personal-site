@@ -66,12 +66,18 @@ def app_factory(settings: Settings) -> FastAPI:
             pathlib.Path(".dev") / "bucket" / "posts", renderer=RENDERER
         )
 
+
         click.echo(
             click.style("Assets are served from '.dev/bucket/assets/'", fg="yellow")
         )
         app.mount("/assets", StaticFiles(directory=".dev/bucket/assets"), name="assets")
 
     repository.collect_posts()
+
+    click.echo("Posts loaded:")
+
+    for post in repository.posts.keys():
+        click.echo(post)
 
     @app.get("/")
     async def show_first_page():
@@ -91,13 +97,33 @@ def app_factory(settings: Settings) -> FastAPI:
         return HTMLResponse(cv_page(theme=BLOG_THEME))
 
     @app.get("/posts/{slug:path}")
-    async def markdown_page(slug: str, request: Request):
+    async def published_post(slug: str, request: Request):
         res = next(
-            (post for post in repository.posts.values() if post.metadata.slug == slug),
+            (
+                post
+                for post in repository.posts.values()
+                if post.metadata.slug == slug and not post.metadata.draft
+            ),
             None,
         )
 
-        if res is None or res.metadata.draft:
+        if res is None:
+            raise HTTPException(404)
+
+        return HTMLResponse(res.html)
+
+    @app.get("/drafts/{slug:path}")
+    async def draft_post(slug: str, request: Request):
+        res = next(
+            (
+                post
+                for post in repository.posts.values()
+                if post.metadata.slug == slug and post.metadata.draft
+            ),
+            None,
+        )
+
+        if res is None:
             raise HTTPException(404)
 
         return HTMLResponse(res.html)

@@ -14,7 +14,7 @@
   },
   "private": true,
   "scripts": {
-    "serve": "uv run fastapi dev --entrypoint personal_site.main:app",
+    "serve": "uv run uvicorn personal_site.main:app --reload --reload-include \"*.md\"",
     "tw:watch": "bunx @tailwindcss/cli -i src/app.css -o static/app.css --watch"
   },
   "type": "module",

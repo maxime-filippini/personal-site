@@ -62,11 +62,18 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
             case _:
                 return f"Posted {days} days ago"
 
-    post_data = [
-        h.article(class_="border-b border-base-300 pb-6")[
+    post_data = []
+
+    for post in reversed(sorted(posts, key=lambda item: item.last_update)):
+        if settings.BLOG_PROD and post.draft:
+            continue
+
+        href = f"/drafts/{post.slug}" if post.draft else f"/posts/{post.slug}"
+
+        post_html = h.article(class_="border-b border-base-300 pb-6")[
             h.h2(class_="text-2xl font-semibold mb-2")[
                 h.a(
-                    href=f"/posts/{post.slug}",
+                    href=href,
                     class_="link link-hover",
                     hx_boost="true",
                 )[post.title]
@@ -76,9 +83,8 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
             ],
             h.p[post.abstract],
         ]
-        for post in reversed(sorted(posts, key=lambda item: item.last_update))
-        if (settings.BLOG_PROD and not post.draft) or (not settings.BLOG_PROD)
-    ]
+
+        post_data.append(post_html)
 
     return with_topnav(theme=theme, title="Posts", description="The posts index")[
         h.div(class_="max-w-4xl mx-auto")[

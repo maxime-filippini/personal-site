@@ -34,4 +34,7 @@ line-length = 88
 force-single-line = true
 
 [tool.uv]
-dev-dependencies = ["debugpy>=1.8.16"]
+dev-dependencies = [
+    "debugpy>=1.8.16",
+    "ipykernel>=7.2.0",
+]

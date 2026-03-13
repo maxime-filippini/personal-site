@@ -209,3 +209,5 @@ data/
 
 .todo
 node_modules/
+.testing/
+.dev
