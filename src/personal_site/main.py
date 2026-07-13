@@ -1,4 +1,5 @@
 import pathlib
+import secrets
 from typing import Annotated
 
 import click
@@ -9,8 +10,8 @@ from fastapi import HTTPException
 from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
-from fastapi.security import HTTPBasic
-from fastapi.security import HTTPBasicCredentials
+from fastapi.security import HTTPAuthorizationCredentials
+from fastapi.security import HTTPBearer
 from fastapi.staticfiles import StaticFiles
 
 from personal_site import posts
@@ -35,10 +36,23 @@ R2_CLIENT = Client(
 
 
 def app_factory(settings: Settings) -> FastAPI:
-    security = HTTPBasic()
+    publish_security = HTTPBearer(auto_error=False)
 
     app = FastAPI()
     app.mount("/static", StaticFiles(directory="static"), name="static")
+
+    async def require_publish_token(
+        credentials: Annotated[
+            HTTPAuthorizationCredentials | None, Depends(publish_security)
+        ],
+    ) -> None:
+        if credentials is None or not secrets.compare_digest(
+            credentials.credentials, settings.PUBLISH_TOKEN
+        ):
+            raise HTTPException(
+                status_code=401,
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
     if settings.BLOG_PROD:
         click.echo(click.style("\nBlog running in PROD mode...", fg="green"))
@@ -65,7 +79,6 @@ def app_factory(settings: Settings) -> FastAPI:
         repository = posts.LocalDirectory(
             pathlib.Path(".dev") / "bucket" / "posts", renderer=RENDERER
         )
-
 
         click.echo(
             click.style("Assets are served from '.dev/bucket/assets/'", fg="yellow")
@@ -130,26 +143,14 @@ def app_factory(settings: Settings) -> FastAPI:
 
     @app.post("/posts/update/{slug:path}")
     async def update_post(
-        slug: str, credentials: Annotated[HTTPBasicCredentials, Depends(security)]
+        slug: str, _: Annotated[None, Depends(require_publish_token)]
     ):
-        if not (
-            credentials.username == settings.ADMIN_USER
-            and credentials.password == settings.ADMIN_PASSWORD
-        ):
-            raise HTTPException(401)
-
         repository.update_post(slug)
 
     @app.post("/posts/update")
     async def update_all_posts(
-        credentials: Annotated[HTTPBasicCredentials, Depends(security)],
+        _: Annotated[None, Depends(require_publish_token)],
     ):
-        if not (
-            credentials.username == settings.ADMIN_USER
-            and credentials.password == settings.ADMIN_PASSWORD
-        ):
-            raise HTTPException(401)
-
         repository.update_all_posts()
 
     return app
