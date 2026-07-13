@@ -1,3 +1,5 @@
+import pathlib
+
 import pydantic_settings
 
 
@@ -7,6 +9,7 @@ class Settings(pydantic_settings.BaseSettings):
     )
 
     BLOG_PROD: bool
+    BLOG_CONTENT_DIR: pathlib.Path = pathlib.Path("content")
     CLOUDFLARE_R2_API_TOKEN: str
     CLOUDFLARE_R2_ACCESS_ID: str
     CLOUDFLARE_R2_SECRET: str

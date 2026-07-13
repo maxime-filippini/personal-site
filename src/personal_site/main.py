@@ -1,4 +1,3 @@
-import pathlib
 from typing import Annotated
 
 import click
@@ -63,14 +62,20 @@ def app_factory(settings: Settings) -> FastAPI:
         click.echo(click.style("\nBlog running in DEV mode...", fg="green"))
 
         repository = posts.LocalDirectory(
-            pathlib.Path(".dev") / "bucket" / "posts", renderer=RENDERER
+            settings.BLOG_CONTENT_DIR / "posts", renderer=RENDERER
         )
-
 
         click.echo(
-            click.style("Assets are served from '.dev/bucket/assets/'", fg="yellow")
+            click.style(
+                f"Assets are served from '{settings.BLOG_CONTENT_DIR}/assets/'",
+                fg="yellow",
+            )
         )
-        app.mount("/assets", StaticFiles(directory=".dev/bucket/assets"), name="assets")
+        app.mount(
+            "/assets",
+            StaticFiles(directory=settings.BLOG_CONTENT_DIR / "assets"),
+            name="assets",
+        )
 
     repository.collect_posts()
 
