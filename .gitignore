@@ -159,6 +159,9 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# Content is a standalone repository nested beside the server source.
+/content/
+
 # Pyre type checker
 .pyre/
 
