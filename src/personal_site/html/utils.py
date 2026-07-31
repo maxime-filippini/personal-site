@@ -1,5 +1,20 @@
+import functools
+import hashlib
+import pathlib
+
 import htpy as h
 from markupsafe import Markup
+
+
+STATIC_ROOT = pathlib.Path("static")
+
+
+@functools.cache
+def static_url(path: str) -> str:
+    with (STATIC_ROOT / path).open("rb") as asset:
+        fingerprint = hashlib.file_digest(asset, "sha256").hexdigest()[:12]
+
+    return f"/static/{path}?v={fingerprint}"
 
 
 def fancy_link(text: str, href: str, class_: str = ""):
