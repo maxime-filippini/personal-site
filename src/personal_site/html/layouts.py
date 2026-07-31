@@ -59,7 +59,7 @@ document.addEventListener('htmx:afterSwap', function() {
 def main_layout(children: h.Node, *, theme: str, title: str):
     return root_layout(theme=theme, title=title, description="")[
         h.body(class_="font-mono min-h-screen bg-base-100")[
-            h.div(class_="p-8")[children]
+            h.div(class_="min-h-screen")[children]
         ],
     ]
 
@@ -70,18 +70,20 @@ def with_topnav(
 ) -> h.Renderable:
     return root_layout(theme=theme, title=title, description=description)[
         h.body(class_="font-mono min-h-screen bg-base-100")[
-            h.div(class_="pt-18")[
-                h.div(
-                    class_="w-full h-14 py-4 flex items-center z-[999] sm:justify-between justify-center px-8 border-b border-base-300 bg-base-200 fixed top-0"
+            h.div(class_="max-w-6xl mx-auto min-h-screen border-x border-base-300")[
+                h.nav(
+                    class_="h-16 flex items-center sm:justify-between justify-center px-4 sm:px-8 border-b border-base-300 bg-base-200 sm:sticky sm:top-0 sm:z-[999]"
                 )[
                     h.a(class_="text-lg sm:block hidden link link-hover", href="/")[
                         "Maxime Filippini"
                     ],
-                    h.div(class_="flex gap-6 items-center sm:text-base text-sm")[
+                    h.div(
+                        class_="flex gap-4 sm:gap-6 items-center text-xs sm:text-base"
+                    )[
                         link(name="Home", href="/"),
                         link(name="CV", href="/cv/"),
                         link(name="Blog", href="/posts/"),
-                        link(name="Contact me", href="/contact/"),
+                        link(name="Contact", href="/contact/"),
                         h.button(
                             class_="rounded-full bg-base-100 border border-base-300 p-1 duration-100 stroke-base-content cursor-pointer stroke-1 hover:bg-black hover:stroke-white",
                             x_data=True,
@@ -100,7 +102,7 @@ def with_topnav(
                         )[sun()],
                     ],
                 ],
-                h.div(class_="px-8")[children],
+                h.main[children],
             ]
         ]
     ]
@@ -112,4 +114,4 @@ def post_layout(
 ) -> h.Renderable:
     return with_topnav(
         theme=theme, title=metadata.title, description=metadata.abstract
-    )[h.div(class_="container max-w-3xl mx-auto pb-8")[children]]
+    )[children]

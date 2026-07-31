@@ -1,23 +1,18 @@
 import htpy as h
 from markupsafe import Markup
 
-from personal_site.html.svgs import link_arrow
 
-
-def fancy_link(text: str, href: str, last: bool = False):
-    border_cls = "" if last else " sm:border-r sm:border-black"
-
+def fancy_link(text: str, href: str, class_: str = ""):
     return (
         h.a(
-            class_="text-xl px-4 sm:w-1/2 group cursor-pointer flex gap-2 items-center justify-center"
-            + border_cls,
+            class_="text-lg sm:text-xl px-4 py-5 sm:py-6 w-full group cursor-pointer flex items-center justify-center "
+            + class_,
             href=href,
             hx_boost="true",
         )[
             h.span(
                 class_="group-hover:underline group-hover:font-bold underline-offset-8 duration-100 text-center"
             )[text],
-            h.div(class_="group-hover:stroke-2 duration-100")[link_arrow()],
         ],
     )
 
