@@ -130,13 +130,13 @@ def posts_index(posts: list[PostMetadata], *, theme: str):
 
     return with_topnav(
         theme=theme,
-        title="Writing and projects",
+        title="Blog",
         description="Writing on quantitative risk, risk technology, and software systems.",
     )[
         _page_header(
             eyebrow="Blog",
-            title="Writing and projects",
-            description="Quantitative risk, risk technology, and practical software systems.",
+            title="Blog",
+            description="On topics such as quantitative risk, risk technology, and practical software systems.",
         ),
         *(
             post_data
