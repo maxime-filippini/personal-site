@@ -22,7 +22,7 @@ def home_page(theme: str):
                         class_="text-2xl sm:text-3xl text-base-content font-semibold mb-4"
                     )["Maxime Filippini"],
                     h.h1(class_="text-3xl sm:text-5xl font-bold leading-tight")[
-                        "Quantitative Risk Leader"
+                        "Quantitative Risk Manager"
                     ],
                 ],
             ],
