@@ -5,7 +5,6 @@ import pathlib
 import htpy as h
 from markupsafe import Markup
 
-
 STATIC_ROOT = pathlib.Path("static")
 
 

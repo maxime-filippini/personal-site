@@ -27,6 +27,25 @@ def root_layout(children: h.Node, *, theme: str, title: str, description: str):
             h.link(rel="stylesheet", href=static_url("app.css")),
             h.link(rel="stylesheet", href=static_url("pygments-theme-aware.css")),
             h.link(
+                rel="stylesheet",
+                href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css",
+                integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX",
+                crossorigin="anonymous",
+            ),
+            h.script(
+                defer=True,
+                src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js",
+                integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj",
+                crossorigin="anonymous",
+            ),
+            h.script(
+                defer=True,
+                src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js",
+                integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz",
+                crossorigin="anonymous",
+                onload="renderMathInElement(document.body);",
+            ),
+            h.link(
                 rel="icon",
                 href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨🏼‍💻</text></svg>",
             ),
@@ -47,8 +66,9 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.10.0/+esm'
 // Initialize mermaid on page load
 mermaid.initialize({ startOnLoad: true });
 
-// Reinitialize mermaid after htmx navigation
-document.addEventListener('htmx:afterSwap', function() {
+// Reinitialize client-side renderers after htmx navigation
+document.addEventListener('htmx:afterSwap', function(event) {
+    renderMathInElement(event.detail.target);
     mermaid.run();
 });
 </script>

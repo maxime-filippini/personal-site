@@ -42,7 +42,9 @@ class BaseRenderer(abc.ABC):
 class BlogPostRenderer(BaseRenderer):
     def __init__(self):
         self.mistune = mistune.create_markdown(
-            escape=False, renderer=BlogRenderer(escape=False), plugins=["table"]
+            escape=False,
+            renderer=BlogRenderer(escape=False),
+            plugins=["table", "math"],
         )
 
     def to_html(self, markdown_content: str, metadata: PostMetadata) -> h.Renderable:

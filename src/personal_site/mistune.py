@@ -25,6 +25,11 @@ def slugify(text: str) -> str:
 
 
 class BlogRenderer(mistune.HTMLRenderer):
+    def image(self, text: str, url: str, title: str | None = None) -> str:
+        src = self.safe_url(url)
+        image = super().image(text, url, title)
+        return f'<a href="{src}" target="_blank" rel="noopener noreferrer">{image}</a>'
+
     def heading(self, text, level, **attrs):
         hid = attrs.get("id") or slugify(text)
 
@@ -39,7 +44,10 @@ class BlogRenderer(mistune.HTMLRenderer):
 
     def block_code(self, code, info=None):
         # "info" is the fence info string, e.g. "python"
-        lang, *opts = shlex.split(info or "")
+        if not info:
+            lang = info
+        else:
+            lang, *opts = shlex.split(info or "")
         if not lang:
             return str(h.pre()[h.code[escape(code)]])
         try:
@@ -74,7 +82,9 @@ class BlogRenderer(mistune.HTMLRenderer):
             return str(Markup(code))
 
         if lang == "note":
-            markdown_parser = mistune.create_markdown(renderer=self, escape=False)
+            markdown_parser = mistune.create_markdown(
+                renderer=self, escape=False, plugins=["math"]
+            )
             code_modified = code.replace("```", "````")
             parsed, _ = markdown_parser.parse(code_modified)
             return str(
@@ -97,7 +107,9 @@ class BlogRenderer(mistune.HTMLRenderer):
             )
 
         if lang == "callout":
-            markdown_parser = mistune.create_markdown(renderer=self, escape=False)
+            markdown_parser = mistune.create_markdown(
+                renderer=self, escape=False, plugins=["math"]
+            )
             parsed, _ = markdown_parser.parse(code)
             return str(
                 h.div(class_="bg-base-200 border-accent border py-2 px-4")[

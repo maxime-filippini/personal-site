@@ -5,7 +5,7 @@
 @plugin "daisyui";
 
 @source "./**/*";
-@source "../data/**/*.md";
+@source "../content/**/*.md";
 
 @theme {
   --font-mono: "Roboto Mono", mono;
