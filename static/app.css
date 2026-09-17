@@ -2381,6 +2381,12 @@ a[href^="http"]:after, a[href^="https"]:after {
 article a[href^="#"]:after {
   display: none;
 }
+article .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
     color-scheme: light;

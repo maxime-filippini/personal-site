@@ -60,6 +60,13 @@ article a[href^="#"]:after {
   display: none;
 }
 
+article .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 @plugin "daisyui/theme" {
   name: "lofi";
   default: true;
