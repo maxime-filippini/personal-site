@@ -52,3 +52,51 @@ abstract: A post
     missingAssetReferences: ['images/missing.png'],
   })
 })
+
+test('reports invalid frontmatter with its source path', () => {
+  const root = mkdtempSync(join(tmpdir(), 'personal-site-content-'))
+  const posts = join(root, 'content/posts')
+  mkdirSync(posts, { recursive: true })
+  mkdirSync(join(root, 'content/assets'), { recursive: true })
+  writeFileSync(
+    join(root, 'content/source.json'),
+    JSON.stringify({
+      repository: 'example/content',
+      revision: 'abc123',
+      expected: { posts: 1, ready: 1, drafts: 0, assets: 0 },
+    }),
+  )
+  writeFileSync(
+    join(posts, 'invalid.md'),
+    `---
+title: 42
+posted_on: "2026-09-20"
+last_update: "2026-09-20"
+draft: false
+abstract: A post
+---
+`,
+  )
+
+  expect(() => buildContentInventory(root)).toThrowError(
+    /content\/posts\/invalid\.md: invalid frontmatter[\s\S]*frontmatter field "title" must be a string/,
+  )
+})
+
+test('validates source provenance', () => {
+  const root = mkdtempSync(join(tmpdir(), 'personal-site-content-'))
+  mkdirSync(join(root, 'content/posts'), { recursive: true })
+  mkdirSync(join(root, 'content/assets'), { recursive: true })
+  writeFileSync(
+    join(root, 'content/source.json'),
+    JSON.stringify({
+      repository: 'example/content',
+      revision: 'abc123',
+      expected: { posts: 'one', ready: 1, drafts: 0, assets: 0 },
+    }),
+  )
+
+  expect(() => buildContentInventory(root)).toThrowError(
+    /source\.json: invalid source provenance[\s\S]*expected\.posts must be a number/,
+  )
+})

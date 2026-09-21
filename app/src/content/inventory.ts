@@ -2,28 +2,46 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { extname, join, relative, resolve } from 'node:path'
 
+import * as v from 'valibot'
 import { parse } from 'yaml'
 
 type PostState = 'draft' | 'ready'
 
-interface SourceProvenance {
-  repository: string
-  revision: string
-  expected: {
-    posts: number
-    ready: number
-    drafts: number
-    assets: number
-  }
-}
+const PostMetadataSchema = v.object(
+  {
+    title: v.string('frontmatter field "title" must be a string'),
+    posted_on: v.string('frontmatter field "posted_on" must be a string'),
+    last_update: v.string(
+      'frontmatter field "last_update" must be a string',
+    ),
+    abstract: v.string('frontmatter field "abstract" must be a string'),
+    draft: v.boolean('frontmatter field "draft" must be a boolean'),
+  },
+  'frontmatter must be a mapping',
+)
 
-interface PostMetadata {
-  title: string
-  posted_on: string
-  last_update: string
-  abstract: string
-  draft: boolean
-}
+const SourceProvenanceSchema = v.object(
+  {
+    repository: v.string('repository must be a string'),
+    revision: v.string('revision must be a string'),
+    expected: v.object({
+      posts: v.number('expected.posts must be a number'),
+      ready: v.number('expected.ready must be a number'),
+      drafts: v.number('expected.drafts must be a number'),
+      assets: v.number('expected.assets must be a number'),
+    }),
+  },
+  'source provenance must be an object',
+)
+
+const SourceFileSchema = v.pipe(
+  v.string(),
+  v.parseJson(undefined, 'source provenance must contain valid JSON'),
+  SourceProvenanceSchema,
+)
+
+type PostMetadata = v.InferOutput<typeof PostMetadataSchema>
+type SourceProvenance = v.InferOutput<typeof SourceProvenanceSchema>
 
 interface PostInventory {
   slug: string
@@ -52,13 +70,6 @@ export interface ContentInventory {
 
 const FRONTMATTER = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/
 const ASSET_REFERENCE = /\/assets\/([^\s)"'>]+)/g
-const REQUIRED_METADATA = [
-  'title',
-  'posted_on',
-  'last_update',
-  'abstract',
-  'draft',
-] as const
 
 function listFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -67,50 +78,20 @@ function listFiles(directory: string): string[] {
   })
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value)
-}
-
-function stringField(
-  metadata: Record<string, unknown>,
-  field: keyof Omit<PostMetadata, 'draft'>,
-  source: string,
-): string {
-  const value = metadata[field]
-  if (typeof value !== 'string') {
-    throw new Error(`${source}: frontmatter field "${field}" must be a string`)
-  }
-  return value
-}
-
 function parseMetadata(markdown: string, source: string): PostMetadata {
   const match = markdown.match(FRONTMATTER)
   if (!match?.[1]) {
     throw new Error(`${source}: missing YAML frontmatter`)
   }
 
-  const parsed: unknown = parse(match[1])
-  if (!isRecord(parsed)) {
-    throw new Error(`${source}: frontmatter must be a mapping`)
+  const result = v.safeParse(PostMetadataSchema, parse(match[1]))
+  if (!result.success) {
+    throw new Error(
+      `${source}: invalid frontmatter\n${v.summarize(result.issues)}`,
+    )
   }
 
-  for (const field of REQUIRED_METADATA) {
-    if (!(field in parsed)) {
-      throw new Error(`${source}: missing frontmatter field "${field}"`)
-    }
-  }
-
-  if (typeof parsed.draft !== 'boolean') {
-    throw new Error(`${source}: frontmatter field "draft" must be a boolean`)
-  }
-
-  return {
-    title: stringField(parsed, 'title', source),
-    posted_on: stringField(parsed, 'posted_on', source),
-    last_update: stringField(parsed, 'last_update', source),
-    abstract: stringField(parsed, 'abstract', source),
-    draft: parsed.draft,
-  }
+  return result.output
 }
 
 function findAssetReferences(markdown: string): string[] {
@@ -125,33 +106,17 @@ function findAssetReferences(markdown: string): string[] {
 
 function readSource(contentDirectory: string): SourceProvenance {
   const sourcePath = join(contentDirectory, 'source.json')
-  const parsed: unknown = JSON.parse(readFileSync(sourcePath, 'utf8'))
-  if (!isRecord(parsed) || !isRecord(parsed.expected)) {
-    throw new Error(`${sourcePath}: invalid source provenance`)
+  const result = v.safeParse(
+    SourceFileSchema,
+    readFileSync(sourcePath, 'utf8'),
+  )
+  if (!result.success) {
+    throw new Error(
+      `${sourcePath}: invalid source provenance\n${v.summarize(result.issues)}`,
+    )
   }
 
-  const { repository, revision, expected } = parsed
-  if (
-    typeof repository !== 'string' ||
-    typeof revision !== 'string' ||
-    typeof expected.posts !== 'number' ||
-    typeof expected.ready !== 'number' ||
-    typeof expected.drafts !== 'number' ||
-    typeof expected.assets !== 'number'
-  ) {
-    throw new Error(`${sourcePath}: invalid source provenance fields`)
-  }
-
-  return {
-    repository,
-    revision,
-    expected: {
-      posts: expected.posts,
-      ready: expected.ready,
-      drafts: expected.drafts,
-      assets: expected.assets,
-    },
-  }
+  return result.output
 }
 
 export function buildContentInventory(rootDirectory: string): ContentInventory {
