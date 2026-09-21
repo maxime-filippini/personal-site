@@ -1,0 +1,10 @@
+{
+  "repository": "maxime-filippini/personal-site-content",
+  "revision": "de5b3eabcd5a20da2342ff4f41468095243e644a",
+  "expected": {
+    "posts": 17,
+    "ready": 8,
+    "drafts": 9,
+    "assets": 32
+  }
+}

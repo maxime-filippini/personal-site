@@ -1,13 +1,11 @@
 # My personal site
 
-This repository contains the server that powers [my personal website](https://maximefilippini.me).
+The replacement application and the legacy server live in separate projects:
 
-It is a simple FastAPI server that serves HTML and converts markdown documents to HTML documents.
+- `app/` — TanStack Start on Cloudflare Workers, including all post source and
+  assets.
+- `legacy/` — the existing FastAPI application and its original frontend and
+  deployment tooling.
 
-## Content publishing
-
-The content publisher refreshes changed posts by calling the protected update
-endpoints with `Authorization: Bearer <token>`. Set `PUBLISH_TOKEN` in the
-server environment to a long, randomly generated value. Store that same value
-as the `SITE_PUBLISH_TOKEN` GitHub Actions secret in the separate content
-repository; it must never be committed to either repository.
+Change into the project you want before installing dependencies or running a
+command. Each directory has its own README and lockfiles.

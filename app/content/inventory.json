@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "maxime-filippini/personal-site-content",
+    "revision": "de5b3eabcd5a20da2342ff4f41468095243e644a",
+    "expected": {
+      "posts": 17,
+      "ready": 8,
+      "drafts": 9,
+      "assets": 32
+    }
+  },
+  "totals": {
+    "posts": 17,
+    "ready": 8,
+    "drafts": 9,
+    "assets": 32,
+    "referencedAssets": 28,
+    "missingAssetReferences": 0
+  },
+  "posts": [
+    {
+      "slug": "automate_your_cv_with_typst_and_github",
+      "state": "ready",
+      "source": "content/posts/automate_your_cv_with_typst_and_github.md",
+      "sha256": "7e9ecb62aaf5ba267185d73134d5385bc41e8f1c3beb15f75bf0637a3125b0bd",
+      "metadata": {
+        "title": "Automate your CV with Typst and GitHub",
+        "posted_on": "2025-10-14",
+        "last_update": "2025-10-14",
+        "abstract": "Creating and maintaining a professional CV often involves tedious formatting and versioning challenges. This post presents a fully automated workflow for building and hosting your CV using Typst and GitHub Actions. We leverage the separation between source code and compiled outputs to automate the reproducible parts of our process, and through that, ensure consistent formatting across versions and easy online distribution of our resume. \n",
+        "draft": false
+      },
+      "assetReferences": [
+        "github-release.png",
+        "typst-vscode.png"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "building-a-document-factory",
+      "state": "ready",
+      "source": "content/posts/building-a-document-factory.md",
+      "sha256": "02dd4c397797cd4839e0acf7ccfc1b2d190d68256b8a1d829a40f6fb3758a2cf",
+      "metadata": {
+        "title": "Building a document factory in Elixir",
+        "posted_on": "2025-07-01",
+        "last_update": "2025-07-01",
+        "abstract": "In this post, we show how we can build a fast prototype for a “document factory” in Elixir, watching a folder for JSON, turning the data into Tailwind-styled HEEx templates with charts, then streaming them through a GenStage pipeline to ChromicPDF for concurrent, fault-tolerant HTML → PDF conversion.\nIf that sounds up your alley, give it a look!\n",
+        "draft": false
+      },
+      "assetReferences": [
+        "doc-factory/print-to-pdf.png",
+        "doc-factory/sample-report.png"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "building_a_typesafe_dag_library",
+      "state": "ready",
+      "source": "content/posts/building_a_typesafe_dag_library.md",
+      "sha256": "18d8d55107cdb5a2ea8c98efce765e7493b6457e58d7c7ccd9493aa0a74b7da8",
+      "metadata": {
+        "title": "Building a simple type-safe DAG library in TypeScript",
+        "posted_on": "2025-09-26",
+        "last_update": "2025-09-26",
+        "abstract": "TypeScript’s type system can do much more than catch mistakes. It can guide users toward valid code. In this post, I illustrate some of TypeScript's power by building a tiny Directed Acyclic Graph (\"DAG\") library that is type-safe by construction.\n",
+        "draft": false
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "care-for-some-caviar",
+      "state": "ready",
+      "source": "content/posts/care-for-some-caviar.md",
+      "sha256": "ab27813a804d3677afbd0fdc1feeb7cbd7a2ac541def1a4734fc2f000d1c5f8c",
+      "metadata": {
+        "title": "Care for some CAViaR?",
+        "posted_on": "2026-09-17",
+        "last_update": "2026-09-17",
+        "abstract": "Value-at-Risk is generally estimated indirectly, either from historical observations or from an assumed distribution of returns. Conditional Autoregressive Value-at-Risk (\"CAViaR\") takes a different approach by modelling the conditional quantile—and therefore VaR—directly. In this post, we introduce the main CAViaR specifications, discuss their calibration, and compare their output against a common Filtered Historical Simulations approach.\n",
+        "draft": false
+      },
+      "assetReferences": [
+        "caviar/nics.png",
+        "caviar/os_BND.png",
+        "caviar/os_FEZ.png",
+        "caviar/os_SPY.png",
+        "caviar/os_VDE.png",
+        "caviar/var_cvs_BND.png",
+        "caviar/vars_BND.png",
+        "caviar/vars_FEZ.png",
+        "caviar/vars_SPY.png",
+        "caviar/vars_VDE.png"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "duckdb_and_parquet",
+      "state": "draft",
+      "source": "content/posts/duckdb_and_parquet.md",
+      "sha256": "6d7627f3ae4d1d49531ed0c6b60af9ab27579a4c75b9cb0f5874192ba24951bb",
+      "metadata": {
+        "title": "Exploring DuckDB",
+        "posted_on": "2026-03-07",
+        "last_update": "2026-03-07",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "elixir-for-frm-apps",
+      "state": "ready",
+      "source": "content/posts/elixir-for-frm-apps.md",
+      "sha256": "a63bc438a5baad1b5151fb4d56bb6760f5a89086b2f0eaeba1f371cbcf8f8324",
+      "metadata": {
+        "title": "Elixir, a good fit for financial risk management applications?",
+        "posted_on": "2025-06-19",
+        "last_update": "2025-06-19",
+        "abstract": "Elixir is a great language for building servers and web applications. But can it be used effectively for building applications that require the use of a scientific stack? Those would usually be built using Python, given the large ecosystem that language has to offer.\nSince falling in love with Elixir, I've wondered if Python could be ditched for the specific use case of building finance/risk-management-related applications.\nCan it? Let's explore!\n",
+        "draft": false
+      },
+      "assetReferences": [
+        "elixir/vegalite-chart.png"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "enabling_the_homegrown_techie",
+      "state": "draft",
+      "source": "content/posts/enabling_the_homegrown_techie.md",
+      "sha256": "b6c80ec81717355b7e7d1fe3e4ab8f0f1d4d8b275155d362b938dbaf90196529",
+      "metadata": {
+        "title": "Enabling the homegrown techie",
+        "posted_on": "2025-10-07",
+        "last_update": "2025-10-07",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "fun_with_descriptors",
+      "state": "draft",
+      "source": "content/posts/fun_with_descriptors.md",
+      "sha256": "fdeea751f8862146288a5e02fcf9b1c753de630119c5d059b65222505ada39cc",
+      "metadata": {
+        "title": "Building a file finders using descriptors and iterators",
+        "posted_on": "2026-05-12",
+        "last_update": "2026-05-12",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "how-i-would-build-a-python-developer-platform",
+      "state": "draft",
+      "source": "content/posts/how-i-would-build-a-python-developer-platform.md",
+      "sha256": "865b23300458c91399b51f4099fa3e22527f8b3a5c9f9040a58b4937ed647d2d",
+      "metadata": {
+        "title": "How I would build a Python platform for small teams",
+        "posted_on": "2025-10-30",
+        "last_update": "2025-10-30",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "interactive-python-apps-using-web-technologies",
+      "state": "draft",
+      "source": "content/posts/interactive-python-apps-using-web-technologies.md",
+      "sha256": "4d52fd0428500836ba4f65ba98d842035fe80b048ba7d6dc8dbd3ee7ed5af05f",
+      "metadata": {
+        "title": "Interactive Python applications using Web technologies",
+        "posted_on": "2026-02-23",
+        "last_update": "2026-02-23",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [
+        "building-scrappy-apps/illustration.svg",
+        "interactive-apps/server_client.svg",
+        "interactive-apps/simple-html.png",
+        "interactive-apps/web-loop.svg"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "keeping-myself-in-the-loop-for-agentic-software-work",
+      "state": "ready",
+      "source": "content/posts/keeping-myself-in-the-loop-for-agentic-software-work.md",
+      "sha256": "f0c6ddfe6d6b55f2876bf7ca2ccd7df282f35557081839723478e0f2840397e6",
+      "metadata": {
+        "title": "Keeping Myself in the Loop for Agentic Software Work",
+        "posted_on": "2026-07-13",
+        "last_update": "2026-07-13",
+        "abstract": "A lightweight private workflow for reviewing agent-generated HTML artifacts from a phone, using Tailscale, a file server, and a small gallery application.\n",
+        "draft": false
+      },
+      "assetReferences": [
+        "keeping-myself-in-the-loop-for-agentic-software-work/example-artifact.png",
+        "keeping-myself-in-the-loop-for-agentic-software-work/file-server-tailscale.png",
+        "keeping-myself-in-the-loop-for-agentic-software-work/gallery-application.png",
+        "keeping-myself-in-the-loop-for-agentic-software-work/gallery-with-risk-measure.png"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "new",
+      "state": "draft",
+      "source": "content/posts/new.md",
+      "sha256": "2a42f62ba26571fef6922a245255e0a094e0d0d1c9f7665b5a19b8b6a4abb43f",
+      "metadata": {
+        "title": "Building a minimal workflow executor in Python using generators",
+        "posted_on": "2025-08-27",
+        "last_update": "2025-08-27",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "scrappy-local-apps",
+      "state": "draft",
+      "source": "content/posts/scrappy-local-apps.md",
+      "sha256": "7772fe9e03e34c02723f1d5ada868e83aa728162a0b72ccb4de142991ae691d9",
+      "metadata": {
+        "title": "TBD",
+        "posted_on": "2025-09-11",
+        "last_update": "2025-09-11",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "simple-deployment-for-personal-apps",
+      "state": "ready",
+      "source": "content/posts/simple-deployment-for-personal-apps.md",
+      "sha256": "83b5a7ca2c8f0489b1053f5b59510b56965d828f8a0a64b8b33975f35f9d120d",
+      "metadata": {
+        "title": "Ship Personal Apps in Minutes with Tailscale (No Public Hosting or Auth required)",
+        "posted_on": "2025-08-20",
+        "last_update": "2025-08-20",
+        "abstract": "Building personal apps is easy; reaching them securely from your phone isn’t. This post shows how to use Tailscale to expose a local FastAPI app to your devices and away from the broader Internet. No public hosting, auth plumbing, or firewall wrangling necessary. As a demo, we build a tiny service that serves a fresh AI-generated motivational quote every 30 minutes, which we will be able to use without fear of abuse from bad actors.\n",
+        "draft": false
+      },
+      "assetReferences": [
+        "motivate.webp",
+        "tailscale-dns.webp",
+        "tailscale-ios.webp",
+        "tailscale-phone-access.webp"
+      ],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "threading_the_burrito",
+      "state": "draft",
+      "source": "content/posts/threading_the_burrito.md",
+      "sha256": "907090929db4629600e0a06c5c19f4c62f09432b4647164b376356db4d070480",
+      "metadata": {
+        "title": "Threading the burrito 🌯",
+        "posted_on": "2026-06-10",
+        "last_update": "2026-06-10",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "til_implicit_context_registration_python",
+      "state": "ready",
+      "source": "content/posts/til_implicit_context_registration_python.md",
+      "sha256": "06b4810145378f2ab7adaaa95d5c6978f39e555bce5f95e4dd9a8efcbb5de225",
+      "metadata": {
+        "title": "TIL - An implicit context registration pattern in Python",
+        "posted_on": "2025-08-23",
+        "last_update": "2025-08-23",
+        "abstract": "A neat pattern in Python: using context managers and a stack to implicitly register objects to their parent—without explicit wiring.\n",
+        "draft": false
+      },
+      "assetReferences": [],
+      "missingAssetReferences": []
+    },
+    {
+      "slug": "til_server_driven_apps_in_typescript",
+      "state": "draft",
+      "source": "content/posts/til_server_driven_apps_in_typescript.md",
+      "sha256": "0680dcf3ea977378992bec7d6dc6435b2d3f9b1df0c1ebab30ae938eb06584d0",
+      "metadata": {
+        "title": "TIL - Server-driven applications using Typescript",
+        "posted_on": "2025-09-15",
+        "last_update": "2025-09-15",
+        "abstract": "TBD\n",
+        "draft": true
+      },
+      "assetReferences": [
+        "elysia-jsx-hello-world.png"
+      ],
+      "missingAssetReferences": []
+    }
+  ],
+  "assets": [
+    "ai/learning.svg",
+    "building-scrappy-apps/illustration.svg",
+    "caviar/nics.png",
+    "caviar/os_BND.png",
+    "caviar/os_FEZ.png",
+    "caviar/os_SPY.png",
+    "caviar/os_VDE.png",
+    "caviar/var_cvs_BND.png",
+    "caviar/var_cvs_SPY.png",
+    "caviar/var_cvs_VDE.png",
+    "caviar/vars_BND.png",
+    "caviar/vars_FEZ.png",
+    "caviar/vars_SPY.png",
+    "caviar/vars_VDE.png",
+    "doc-factory/print-to-pdf.png",
+    "doc-factory/sample-report.png",
+    "elixir/vegalite-chart.png",
+    "elysia-jsx-hello-world.png",
+    "github-release.png",
+    "interactive-apps/server_client.svg",
+    "interactive-apps/simple-html.png",
+    "interactive-apps/web-loop.svg",
+    "keeping-myself-in-the-loop-for-agentic-software-work/example-artifact.png",
+    "keeping-myself-in-the-loop-for-agentic-software-work/file-server-tailscale.png",
+    "keeping-myself-in-the-loop-for-agentic-software-work/gallery-application.png",
+    "keeping-myself-in-the-loop-for-agentic-software-work/gallery-with-risk-measure.png",
+    "motivate.webp",
+    "sdaasd.png",
+    "tailscale-dns.webp",
+    "tailscale-ios.webp",
+    "tailscale-phone-access.webp",
+    "typst-vscode.png"
+  ]
+}
