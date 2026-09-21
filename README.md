@@ -9,3 +9,6 @@ The replacement application and the legacy server live in separate projects:
 
 Change into the project you want before installing dependencies or running a
 command. Each directory has its own README and lockfiles.
+
+Shared architecture decisions and migration plans live in `docs/`, with the
+project language documented in `CONTEXT.md`.
